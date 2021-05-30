@@ -12,4 +12,5 @@
     <color name="tab_unselected">#cdcdcd</color>
     <color name="red">#FF0000</color>
     <color name="colorBlack">#000000</color>
+    <color name="articleUserNameColor">#D66C26</color>
 </resources>
