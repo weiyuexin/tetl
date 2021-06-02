@@ -17,6 +17,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wang.avi.AVLoadingIndicatorView;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -24,6 +26,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class HomeTuijianFragment extends Fragment {
+    //加载动画
+    private AVLoadingIndicatorView avi;
 
     //保存数据库查询到的id
     private ArrayList<Integer> idList = new ArrayList<>();
@@ -132,6 +136,8 @@ public class HomeTuijianFragment extends Fragment {
         tv_starSum = view.findViewById(R.id.starSum);
         //ListView
         list=view.findViewById(R.id.listView_tuijian);
+        //加载动画
+        avi=view.findViewById(R.id.avi);
     }
 
     class Task extends AsyncTask<Void,Void,Void> {
@@ -167,7 +173,6 @@ public class HomeTuijianFragment extends Fragment {
                         realNameList.add(findRealAuthor.getString("realName"));
                     }
                 }
-
             }catch (Exception e){
                 error = e.toString();
             }
@@ -181,6 +186,10 @@ public class HomeTuijianFragment extends Fragment {
                     authorIdList,releaseTimeList,starList,userNameList,realNameList);
             list.setAdapter(homeArticleAdapter);
             //System.out.println(contentList);
+            //加载完成后隐藏动画，显示ListView
+            avi.setVisibility(View.GONE);
+            list.setVisibility(View.VISIBLE);
+
             super.onPostExecute(aVoid);
         }
     }
