@@ -53,7 +53,7 @@
                 android:orientation="vertical">
                 <TextView
                     android:text="骆伟培"
-                    android:id="@+id/userName"
+                    android:id="@+id/contet_userName"
                     android:textSize="20sp"
                     android:textColor="@color/articleUserNameColor"
                     android:layout_width="wrap_content"
@@ -61,12 +61,13 @@
                 <TextView
                     android:text="2021.2.3"
                     android:textSize="15sp"
-                    android:id="@+id/release_time"
+                    android:id="@+id/content_release_time"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_content"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -74,7 +75,7 @@
             <TextView
                 android:text="hhhh"
                 android:padding="10dp"
-                android:id="@+id/article_content"
+                android:id="@+id/content_article_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="100dp"/>
@@ -83,6 +84,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
                 android:background="#EEEEEE"/>
+            <LinearLayout
+                android:paddingLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:text="评论"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:id="@+id/content_comment_sum"
+                        android:text="66"
+                        android:paddingLeft="5dp"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:text="赞"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:id="@+id/star_sum"
+                        android:text="99"
+                        android:paddingLeft="5dp"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+            </LinearLayout>
             <!--评论列表-->
             <ListView
                 android:padding="10dp"
@@ -91,6 +129,34 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray"
+            android:minHeight="80dp"
+            android:padding="10dp"
+            android:visibility="gone">
+            <EditText
+                android:id="@+id/comment_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:background="@drawable/custom_edittext_background"
+                android:layout_height="match_parent"
+                android:hint="写评论..."/>
+            <TextView
+                android:id="@+id/send_comment"
+                android:text="发送"
+                android:textSize="17sp"
+                android:textColor="@color/send"
+                android:gravity="center"
+                android:layout_width="50dp"
+                android:layout_height="40dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_bottom"
+            android:visibility="visible"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:background="@color/gray"

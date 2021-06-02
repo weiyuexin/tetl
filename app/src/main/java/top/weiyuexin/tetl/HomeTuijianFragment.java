@@ -42,6 +42,8 @@ public class HomeTuijianFragment extends Fragment {
     private ArrayList<String> userNameList = new ArrayList<>();
     //保存从数据库查询到的真实姓名
     private ArrayList<String> realNameList =new ArrayList<>();
+    //保存从数据库查询到的评论总数
+    private ArrayList<Integer> commentNumList = new ArrayList<>();
 
 
     /*ListView中的布局*/
@@ -88,6 +90,16 @@ public class HomeTuijianFragment extends Fragment {
                 //初始化意图对象
                 Intent intent=new Intent(getActivity(),ArticleContentActivity.class);
                 //传递数据信息
+                Bundle data=new Bundle();
+                data.putInt("id",idList.get(position));
+                data.putString("type",typeList.get(position));
+                data.putString("content",contentList.get(position));
+                data.putString("author",realNameList.get(position));
+                data.putString("username",userNameList.get(position));
+                data.putInt("starSum",starList.get(position));
+                data.putInt("commentSum",commentNumList.get(position));
+                data.putString("time",releaseTimeList.get(position));
+                intent.putExtras(data);
 
                 //激活意图
                 startActivity(intent);
@@ -145,6 +157,7 @@ public class HomeTuijianFragment extends Fragment {
                     authorIdList.add(resultSet.getInt("author"));
                     releaseTimeList.add(resultSet.getString("time"));
                     starList.add(resultSet.getInt("star"));
+                    commentNumList.add(resultSet.getInt("comment"));
                 }
                 //查询作者信息
                 for(int i=0;i<=authorIdList.size()+1;i++){
