@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:paddingTop="10dp"
+    android:layout_height="50dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:gravity="center"
     android:background="@color/gray">
 
     <LinearLayout
@@ -14,8 +16,8 @@
         android:orientation="vertical"
         android:id="@+id/tab_home">
         <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:id="@+id/tab_iv_home"
             android:background="@drawable/tab_home"/>
         <TextView
@@ -23,6 +25,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tab_tv_home"
             android:gravity="center"
+            android:textSize="10sp"
             android:textColor="@color/tab_unselected"
             android:text="首页"/>
     </LinearLayout>
@@ -36,8 +39,8 @@
         android:orientation="vertical"
         android:id="@+id/tab_square">
         <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:id="@+id/tab_iv_square"
             android:background="@drawable/tab_square"/>
         <TextView
@@ -45,6 +48,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tab_tv_square"
             android:gravity="center"
+            android:textSize="10sp"
             android:textColor="@color/tab_unselected"
             android:text="广场"/>
     </LinearLayout>
@@ -57,8 +61,8 @@
         android:orientation="vertical"
         android:id="@+id/tab_message">
         <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:id="@+id/tab_iv_message"
             android:background="@drawable/tab_message"/>
         <TextView
@@ -66,6 +70,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tab_tv_message"
             android:gravity="center"
+            android:textSize="10sp"
             android:textColor="@color/tab_unselected"
             android:text="消息"/>
     </LinearLayout>
@@ -78,8 +83,8 @@
         android:orientation="vertical"
         android:id="@+id/tab_profile">
         <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
             android:id="@+id/tab_iv_profile"
             android:background="@drawable/tab_profile"/>
         <TextView
@@ -87,6 +92,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tab_tv_profile"
             android:gravity="center"
+            android:textSize="10sp"
             android:textColor="@color/tab_unselected"
             android:text="我的"/>
     </LinearLayout>

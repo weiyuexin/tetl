@@ -28,18 +28,23 @@
             android:orientation="vertical">
             <TextView
                 android:id="@+id/userName"
-                android:textSize="20sp"
+                android:textSize="17sp"
+                android:text="test"
                 android:textColor="@color/articleUserNameColor"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"/>
             <TextView
-                android:textSize="15sp"
+                android:textSize="12sp"
+                android:text="2021/12/42"
                 android:id="@+id/release_time"
+                android:paddingBottom="5dp"
+                android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
+        android:layout_marginTop="5dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
         android:orientation="vertical"
@@ -74,7 +79,7 @@
                 <TextView
                     android:text="收藏"
                     android:textSize="13sp"
-                    android:layout_width="30dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:gravity="center"/>
 
@@ -94,7 +99,7 @@
                     android:id="@+id/commentSum"
                     android:text="评论"
                     android:textSize="13sp"
-                    android:layout_width="30dp"
+                    android:layout_width="wrap_content"
                     android:gravity="center"
                     android:layout_height="match_parent"/>
             </LinearLayout>
@@ -113,7 +118,7 @@
                     android:id="@+id/starSum"
                     android:text="点赞"
                     android:textSize="13sp"
-                    android:layout_width="30dp"
+                    android:layout_width="wrap_content"
                     android:gravity="center"
                     android:layout_height="match_parent"/>
 

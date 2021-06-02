@@ -134,7 +134,7 @@ public class HomeFragment extends Fragment {
                 TypedValue.COMPLEX_UNIT_DIP, 4, dm));
         // 设置Tab标题文字的大小
         home_tabs.setTextSize((int) TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_SP, 16, dm));
+                TypedValue.COMPLEX_UNIT_SP, 13, dm));
         // 设置Tab Indicator的颜色
         home_tabs.setIndicatorColor(Color.parseColor("#45c01a"));
         // 取消点击Tab时的背景色

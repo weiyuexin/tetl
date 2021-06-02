@@ -49,7 +49,7 @@
             <LinearLayout
                 android:paddingLeft="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
                 <TextView
                     android:text="骆伟培"
@@ -60,9 +60,10 @@
                     android:layout_height="30dp"/>
                 <TextView
                     android:text="2021.2.3"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:id="@+id/content_release_time"
                     android:layout_width="wrap_content"
+                    android:paddingBottom="5dp"
                     android:layout_height="20dp"/>
             </LinearLayout>
         </LinearLayout>
@@ -175,7 +176,7 @@
                 <TextView
                     android:text="收藏"
                     android:textSize="13sp"
-                    android:layout_width="30dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:gravity="center"/>
 
@@ -195,7 +196,7 @@
                     android:id="@+id/commentSum"
                     android:text="评论"
                     android:textSize="13sp"
-                    android:layout_width="30dp"
+                    android:layout_width="wrap_content"
                     android:gravity="center"
                     android:layout_height="match_parent"/>
             </LinearLayout>
@@ -214,7 +215,7 @@
                     android:id="@+id/starSum"
                     android:text="点赞"
                     android:textSize="13sp"
-                    android:layout_width="30dp"
+                    android:layout_width="wrap_content"
                     android:gravity="center"
                     android:layout_height="match_parent"/>
 
