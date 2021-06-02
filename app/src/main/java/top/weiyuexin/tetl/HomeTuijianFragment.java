@@ -1,5 +1,6 @@
 package top.weiyuexin.tetl;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -8,11 +9,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -73,9 +76,27 @@ public class HomeTuijianFragment extends Fragment {
 
         //新建异步线程，链接查询数据库
         new Task().execute();
-        
+        //定义文章列表点击事件
+        click();
         return view;
     }
+
+    private void click() {
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //初始化意图对象
+                Intent intent=new Intent(getActivity(),ArticleContentActivity.class);
+                //传递数据信息
+
+                //激活意图
+                startActivity(intent);
+                //改变activity切换动画
+                getActivity().overridePendingTransition(R.anim.slide_in_right,R.anim.anim_no);
+            }
+        });
+    }
+
 
     private void initView(View view) {
         /*初始化各个组件*/
@@ -172,6 +193,10 @@ public class HomeTuijianFragment extends Fragment {
         private ArrayList<String> userNameList = new ArrayList<>();
         //保存从数据库查询到的真实姓名
         private ArrayList<String> realNameList =new ArrayList<>();
+        //保存收藏的状态，默认是0，点击收藏后会变成1
+        private ArrayList<Integer> shoucangList=new ArrayList<>();
+        //保存点赞的状态，同上
+        private ArrayList<Integer> isStaredList=new ArrayList<>();
 
         public HomeArticleAdapter(ArrayList<Integer> id,ArrayList<String > type,
                                   ArrayList<String> content,ArrayList<String> img,
@@ -187,6 +212,11 @@ public class HomeTuijianFragment extends Fragment {
             this.starList=star;
             this.userNameList=userName;
             this.realNameList=realName;
+            //初始化是否收藏标志列表和是否点赞标志位列表，默认是0
+            for (int i=0;i<idList.size();i++){
+                shoucangList.add(0);
+                isStaredList.add(0);
+            }
         }
 
         @Override
@@ -220,17 +250,85 @@ public class HomeTuijianFragment extends Fragment {
             if(starList.get(position)>0){
                 starSum.setText(starList.get(position).toString());
             }
+            //判断是否点赞，若为1，则已点赞，显示为已点赞状态
+            if(isStaredList.get(position) == 1){
+                LinearLayout star=view.findViewById(R.id.star);
+                star.setSelected(true);
+            }
 
+            //若真实姓名不为空，则显示真实姓名，否则显示昵称
             if (realNameList.get(position)!=null){
                 userName.setText(realNameList.get(position).toString());
             }else {
                 userName.setText(userNameList.get(position).toString());
             }
-            //System.out.println(userNameList);
-            //System.out.println(userNameList.size());
+            //定义收藏按钮
+            LinearLayout shoucang=view.findViewById(R.id.shoucang);
+            //定义点击收藏后的事件
+            shoucang.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //收藏状态变成1
+                    shoucangList.set(position,1);
+                    shoucang.setSelected(true);
+                    Toast.makeText(getActivity(),"收藏成功!",Toast.LENGTH_SHORT).show();
+                }
+            });
+            //显示是否收藏状态，若为1，则是收藏
+            if(shoucangList.get(position) ==1){
+                shoucang.setSelected(true);   //改变图片样式
+            }
 
+            //定义评论按钮
+            LinearLayout comment=view.findViewById(R.id.comment);
+            //点击评论后的事件
+            comment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getActivity(),"评论功能升级中，敬请期待",Toast.LENGTH_SHORT).show();
+                }
+            });
+            //定义点赞按钮
+            LinearLayout star=view.findViewById(R.id.star);
+            //判断是否已经点赞，点赞后点赞数加一，存入数据库
+            if(isStaredList.get(position) == 0){
+                star.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Integer starsum;
+                        starsum=starList.get(position);
+                        starsum++;
+                        //更新点赞数列表中的值
+                        starList.set(position,starsum);
+                        star.setSelected(true);
+                        //更新是否点赞的标志位
+                        isStaredList.set(position,1);
+                        //更新点赞数
+                        starSum.setText(starList.get(position).toString());
+                        int finalStarsum = (int)starsum;
+                        new Thread(){
+                            @Override
+                            public void run() {
+                                try {
+                                    //动态加载类
+                                    Class.forName("com.mysql.jdbc.Driver");
+                                    Connection connection= DriverManager.getConnection("jdbc:mysql://1.15.60.193:3306/Android",
+                                            "root","Weiyuexin@123456");
+                                    Statement statement=connection.createStatement();
+                                    //更新点赞数
+                                    System.out.println();
+                                    boolean resultSet=statement.execute("UPDATE article SET star="+ finalStarsum+" WHERE id=" +(int)idList.get(position));
+                                }catch (Exception e){
+                                    String error;
+                                    error = e.toString();
+                                    System.out.println(error);
+                                }
+                            }
+                        }.start();//开启线程
+                    }
+                });
+            }
             return view;
         }
     }
-
 }

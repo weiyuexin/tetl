@@ -27,8 +27,8 @@
         <!--标题文本是否大写，默认为true-->
         <attr name="pstsTextAllCaps" format="boolean" />
         <attr name="pstsSelectedTabTextColor" format="color" />
-        <attr name="pstsIndicatorOffset" format="dimension"/>
-        <attr name="pstsIndicatorIsRound" format="boolean"/>
-        <attr name="pstsIndicatorRoundRadius" format="dimension"/>
+        <attr name="pstsIndicatorOffset" format="dimension" />
+        <attr name="pstsIndicatorIsRound" format="boolean" />
+        <attr name="pstsIndicatorRoundRadius" format="dimension" />
     </declare-styleable>
 </resources>
