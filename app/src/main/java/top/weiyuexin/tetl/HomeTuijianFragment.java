@@ -96,6 +96,7 @@ public class HomeTuijianFragment extends Fragment {
                 //传递数据信息
                 Bundle data=new Bundle();
                 data.putInt("id",idList.get(position));
+                data.putInt("authorid",authorIdList.get(position));
                 data.putString("type",typeList.get(position));
                 data.putString("content",contentList.get(position));
                 data.putString("author",realNameList.get(position));
@@ -265,9 +266,47 @@ public class HomeTuijianFragment extends Fragment {
             TextView release_time = view.findViewById(R.id.release_time);
             TextView article_content =view.findViewById(R.id.article_content);
             TextView starSum = view.findViewById(R.id.starSum);
+            ImageView head_pic=view.findViewById(R.id.head_pic);
 
             release_time.setText(releaseTimeList.get(position).toString());
             article_content.setText(contentList.get(position).toString());
+
+            //点击头像跳转到作者详情页
+            head_pic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //初始化意图
+                    Intent intent1=new Intent(getActivity(),PersonalInformationDetailsPageActivity.class);
+                    //传递数据信息
+                    Bundle bundle=new Bundle();
+                    bundle.putInt("id",authorIdList.get(position));
+
+                    intent1.putExtras(bundle);
+                    //激活意图
+                    startActivity(intent1);
+                    //改变activity切换动画
+                    getActivity().overridePendingTransition(R.anim.slide_in_right,R.anim.anim_no);
+                }
+            });
+            //点击昵称跳转到作者详情页
+            userName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //初始化意图
+                    Intent intent1=new Intent(getActivity(),PersonalInformationDetailsPageActivity.class);
+                    //传递数据信息
+                    Bundle bundle=new Bundle();
+                    bundle.putInt("id",authorIdList.get(position));
+
+                    intent1.putExtras(bundle);
+                    //激活意图
+                    startActivity(intent1);
+                    //改变activity切换动画
+                    getActivity().overridePendingTransition(R.anim.slide_in_right,R.anim.anim_no);
+                }
+            });
+
+
             //点赞数量大于0时，显示点赞数
             if(starList.get(position)>0){
                 starSum.setText(starList.get(position).toString());

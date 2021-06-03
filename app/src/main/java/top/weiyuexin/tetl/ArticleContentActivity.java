@@ -9,9 +9,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,6 +35,8 @@ public class ArticleContentActivity extends AppCompatActivity {
     private LinearLayout comment;
     //定义文章作者显示
     private TextView author;
+    //作者头像
+    private ImageView head_pic;
     //定义文章发布日期
     private TextView registerTime;
     //定义文章正文显示组件
@@ -87,6 +92,40 @@ public class ArticleContentActivity extends AppCompatActivity {
                 Toast.makeText(ArticleContentActivity.this,"评论成功",Toast.LENGTH_SHORT).show();
             }
         });
+        //点击头像跳转到作者详情页
+        head_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //初始化意图
+                Intent intent1=new Intent(ArticleContentActivity.this,PersonalInformationDetailsPageActivity.class);
+                //传递数据信息
+                Bundle bundle=new Bundle();
+                bundle.putInt("id",data.getInt("authorid"));
+
+                intent1.putExtras(bundle);
+                //激活意图
+                startActivity(intent1);
+                //改变activity切换动画
+                overridePendingTransition(R.anim.slide_in_right,R.anim.anim_no);
+            }
+        });
+        //点击昵称跳转到作者详情页
+        author.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //初始化意图
+                Intent intent1=new Intent(ArticleContentActivity.this,PersonalInformationDetailsPageActivity.class);
+                //传递数据信息
+                Bundle bundle=new Bundle();
+                bundle.putInt("id",data.getInt("authorid"));
+
+                intent1.putExtras(bundle);
+                //激活意图
+                startActivity(intent1);
+                //改变activity切换动画
+                overridePendingTransition(R.anim.slide_in_right,R.anim.anim_no);
+            }
+        });
 
         /*//获取当前时间
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");// HH:mm:ss
@@ -95,6 +134,13 @@ public class ArticleContentActivity extends AppCompatActivity {
         String nowTime;
         nowTime=simpleDateFormat.format(date);
         System.out.println(nowTime);*/
+
+
+        ImmersionBar.with(this)
+                .barColor(R.color.white)//同时自定义状态栏和导航栏颜色，不写默认状态栏为透明色，导航栏为黑色
+                .fitsSystemWindows(true)
+                .statusBarDarkFont(true, 0.2f) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
+                .init();
     }
 
     //初始化各个组件
@@ -108,6 +154,7 @@ public class ArticleContentActivity extends AppCompatActivity {
         ll_bottom=findViewById(R.id.ll_bottom);
         comment=findViewById(R.id.comment);
         ll_content=findViewById(R.id.ll_content);
+        head_pic=findViewById(R.id.article_head_pic);
 
         author=findViewById(R.id.contet_userName);
         registerTime=findViewById(R.id.content_release_time);
