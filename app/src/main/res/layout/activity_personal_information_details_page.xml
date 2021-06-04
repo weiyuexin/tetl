@@ -47,7 +47,6 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/peopleName"
-                    android:text="hhh"
                     android:textSize="28sp"
                     android:textColor="@color/black"
                     android:textStyle="bold"
@@ -72,7 +71,6 @@
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:id="@+id/people_userName"
-                    android:text="hhh"
                     android:textSize="18sp"
                     android:textColor="#AA8F8F"
                     android:layout_width="wrap_content"
@@ -110,7 +108,6 @@
                 android:textSize="16sp"
                 android:paddingLeft="20dp"
                 android:textColor="@color/black"
-                android:text="hhh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -139,7 +136,6 @@
                 android:textSize="16sp"
                 android:paddingLeft="20dp"
                 android:textColor="@color/black"
-                android:text="hhh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -168,7 +164,6 @@
                 android:textSize="16sp"
                 android:paddingLeft="20dp"
                 android:textColor="@color/black"
-                android:text="2hhh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -177,6 +172,7 @@
             android:layout_height="1dp"
             android:background="#EEEEEE"/>
         <LinearLayout
+            android:id="@+id/ll_call"
             android:paddingLeft="10dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -196,10 +192,24 @@
                 android:id="@+id/peoplePhone"
                 android:textSize="16sp"
                 android:paddingLeft="20dp"
-                android:textColor="@color/black"
-                android:text="hhhh"
+                android:textColor="#1296db"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:paddingRight="15dp"
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/call"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"/>
+                <TextView
+                    android:text="点击呼叫"
+                    android:textColor="#1296db"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
         </LinearLayout>
         <ImageView
             android:layout_width="fill_parent"

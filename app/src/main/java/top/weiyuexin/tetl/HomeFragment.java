@@ -14,6 +14,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -29,6 +30,8 @@ public class HomeFragment extends Fragment {
 
     private PagerSlidingTabStrip home_tabs;
     private ViewPager viewPager;
+    //右上角写文章按钮
+    private ImageView toWriteArticle;
 
     //定义存放要显示的Fragment的数组
     ArrayList<Fragment> home_fragments = new ArrayList<>();
@@ -65,6 +68,8 @@ public class HomeFragment extends Fragment {
         viewPager =(ViewPager) view.findViewById(R.id.home_viewpager);
         //获取PagerSlidingTabStrip实例
         home_tabs = (PagerSlidingTabStrip)view.findViewById(R.id.home_tabs);
+        //初始化右上角写文章按钮
+        toWriteArticle=view.findViewById(R.id.toWriteArticle);
         //将要显示的fragment存放到数组中
         home_fragments.add(new HomeTuijianFragment());
         home_fragments.add(new HomeShenghuoFragment());
@@ -100,6 +105,22 @@ public class HomeFragment extends Fragment {
             @Override
             public void onPageScrollStateChanged(int state) {
 
+            }
+        });
+        //点击写文章按住跳转到写文章页面
+        toWriteArticle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //初始化意图
+                Intent intent=new Intent(getActivity(),EditArticleActivity.class);
+                Bundle bundle=new Bundle();
+                //传递数据
+
+                intent.putExtras(bundle);
+                //激活意图
+                startActivity(intent);
+                //改变切换动画
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.anim_no);
             }
         });
     }

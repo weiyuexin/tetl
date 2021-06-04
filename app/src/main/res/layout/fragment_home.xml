@@ -47,6 +47,7 @@
                 android:textSize="15dp" />
         </LinearLayout>
         <ImageView
+            android:id="@+id/toWriteArticle"
             android:layout_alignParentRight="true"
             android:layout_width="25dp"
             android:layout_height="25dp"

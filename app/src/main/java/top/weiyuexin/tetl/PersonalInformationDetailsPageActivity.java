@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gyf.immersionbar.ImmersionBar;
@@ -29,6 +31,7 @@ public class PersonalInformationDetailsPageActivity extends AppCompatActivity {
     private TextView peopleMajor;
     private TextView peopleTime;
     private TextView phonenumber;
+    private LinearLayout ll_call;
 
     //保存数据库查询到的注册时间
     private String registertime;
@@ -66,6 +69,13 @@ public class PersonalInformationDetailsPageActivity extends AppCompatActivity {
 
         //新建异步线程，链接查询数据库
         new Task().execute();
+        //点击号码拨号
+        ll_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber)));
+            }
+        });
 
     }
 
@@ -78,6 +88,7 @@ public class PersonalInformationDetailsPageActivity extends AppCompatActivity {
         peopleTime=findViewById(R.id.peopleTime);
         phonenumber=findViewById(R.id.peoplePhone);
         peopletoolbar=findViewById(R.id.people_toolbar);
+        ll_call=findViewById(R.id.ll_call);
 
         peopletoolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

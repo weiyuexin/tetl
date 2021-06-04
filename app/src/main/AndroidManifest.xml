@@ -8,6 +8,8 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 拨打电话的权限，这里必须要添加权限，否则当点击电话号码的时候程序会崩溃 -->
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:allowBackup="true"
@@ -16,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.TETL">
-        <activity android:name=".PersonalInformationDetailsPageActivity"></activity>
+        <activity android:name=".EditArticleActivity" />
+        <activity android:name=".PersonalInformationDetailsPageActivity" />
         <activity android:name=".ArticleContentActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".MainActivity">

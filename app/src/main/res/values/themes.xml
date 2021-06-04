@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.TETL" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimary">#F2F2F2</item>
         <item name="colorPrimaryVariant">@color/gray</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
