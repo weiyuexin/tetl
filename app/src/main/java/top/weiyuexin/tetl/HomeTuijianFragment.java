@@ -17,6 +17,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.scwang.smart.refresh.footer.BallPulseFooter;
+import com.scwang.smart.refresh.header.ClassicsHeader;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.constant.SpinnerStyle;
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.sql.Connection;
@@ -28,6 +34,8 @@ import java.util.ArrayList;
 public class HomeTuijianFragment extends Fragment {
     //加载动画
     private AVLoadingIndicatorView avi;
+    //自动刷新布局
+    private RefreshLayout refreshLayout_tuijian;
 
     //保存数据库查询到的id
     private ArrayList<Integer> idList = new ArrayList<>();
@@ -137,15 +145,46 @@ public class HomeTuijianFragment extends Fragment {
         tv_starSum = view.findViewById(R.id.starSum);
         //ListView
         list=view.findViewById(R.id.listView_tuijian);
-        //加载动画
-        avi=view.findViewById(R.id.avi);
+
+        refreshLayout_tuijian=(RefreshLayout)view.findViewById(R.id.refreshLayout_tuijian);
+        refreshLayout_tuijian.setRefreshHeader(new ClassicsHeader(getActivity()));
+        refreshLayout_tuijian.autoRefresh();//自动刷新
+        refreshLayout_tuijian.autoLoadMore();//自动加载
+        refreshLayout_tuijian.setDisableContentWhenRefresh(true);//是否在刷新的时候禁止列表的操作
+        //设置 Footer 为 球脉冲 样式
+        refreshLayout_tuijian.setRefreshFooter(new BallPulseFooter(getActivity()).setSpinnerStyle(SpinnerStyle.Scale));
+        refreshLayout_tuijian.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                //调用异步线程，查询数据库
+                new Task().execute();
+                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+            }
+        });
+        refreshLayout_tuijian.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshlayout) {
+                refreshlayout.finishLoadMore(1000/*,false*/);//传入false表示加载失败
+            }
+        });
     }
 
     class Task extends AsyncTask<Void,Void,Void> {
 
         String error="";
+        //清空原始数据，主要是刷新时
         @Override
         protected Void doInBackground(Void... voids) {
+            idList.clear();
+            typeList.clear();
+            contentList.clear();
+            imgList.clear();
+            authorIdList.clear();
+            starList.clear();
+            commentNumList.clear();
+            releaseTimeList.clear();
+            userNameList.clear();
+            realNameList.clear();
             try {
                 //动态加载类
                 Class.forName("com.mysql.jdbc.Driver");
@@ -187,10 +226,8 @@ public class HomeTuijianFragment extends Fragment {
                     authorIdList,releaseTimeList,starList,userNameList,realNameList);
             list.setAdapter(homeArticleAdapter);
             //System.out.println(contentList);
-            //加载完成后隐藏动画，显示ListView
-            avi.setVisibility(View.GONE);
             list.setVisibility(View.VISIBLE);
-
+            homeArticleAdapter.notifyDataSetInvalidated();
             super.onPostExecute(aVoid);
         }
     }

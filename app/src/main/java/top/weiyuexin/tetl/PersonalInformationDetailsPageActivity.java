@@ -62,7 +62,7 @@ public class PersonalInformationDetailsPageActivity extends AppCompatActivity {
         initView();
 
         ImmersionBar.with(this)
-                .barColor(R.color.white)//同时自定义状态栏和导航栏颜色，不写默认状态栏为透明色，导航栏为黑色
+                .statusBarColor(R.color.white)     //状态栏颜色，不写默认透明色
                 .fitsSystemWindows(true)
                 .statusBarDarkFont(true, 0.2f) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
                 .init();

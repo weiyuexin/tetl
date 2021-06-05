@@ -52,4 +52,18 @@ dependencies {
     // kotlin扩展（可选）
     implementation 'com.gyf.immersionbar:immersionbar-ktx:3.0.0'
 
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'jp.wasabeef:glide-transformations:2.0.1'
+
+    implementation 'androidx.appcompat:appcompat:1.0.0'                 //必须 1.0.0 以上
+
+    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.3'      //核心必须依赖
+    implementation  'com.scwang.smart:refresh-header-classics:2.0.3'    //经典刷新头
+    implementation  'com.scwang.smart:refresh-header-radar:2.0.3'       //雷达刷新头
+    implementation  'com.scwang.smart:refresh-header-falsify:2.0.3'     //虚拟刷新头
+    implementation  'com.scwang.smart:refresh-header-material:2.0.3'    //谷歌刷新头
+    implementation  'com.scwang.smart:refresh-header-two-level:2.0.3'   //二级刷新头
+    implementation  'com.scwang.smart:refresh-footer-ball:2.0.3'        //球脉冲加载
+    implementation  'com.scwang.smart:refresh-footer-classics:2.0.3'    //经典加载
+
 }

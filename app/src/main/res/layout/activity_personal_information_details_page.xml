@@ -17,17 +17,18 @@
         app:titleMarginStart="100dp">
         <ImageView
             android:id="@+id/my"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:src="@drawable/dot"
             android:layout_gravity="center|right"
-            android:paddingRight="10dp"/>
+            android:layout_marginEnd="20dp"/>
     </androidx.appcompat.widget.Toolbar>
     <LinearLayout
         android:padding="10dp"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="150dp">
         <top.weiyuexin.tetl.CircleImageView
             android:id="@+id/people_logo"
             android:layout_marginTop="5dp"
@@ -40,14 +41,15 @@
             android:paddingTop="5dp"
             android:paddingLeft="20dp"
             android:orientation="vertical"
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/peopleName"
-                    android:textSize="28sp"
+                    android:textSize="25sp"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
@@ -68,13 +70,14 @@
                     android:textSize="18sp"
                     android:textColor="#AA8F8F"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="30dp"/>
                 <TextView
+                    android:text="dsfgfdg"
                     android:id="@+id/people_userName"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="#AA8F8F"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="30dp"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -95,17 +98,17 @@
             android:layout_height="80dp">
             <ImageView
                 android:src="@drawable/college"
-                android:layout_width="30dp"
-                android:layout_height="30dp"/>
+                android:layout_width="25dp"
+                android:layout_height="25dp"/>
             <TextView
                 android:paddingLeft="10dp"
                 android:text="所在学院"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/peopleCollege"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:paddingLeft="20dp"
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"
@@ -123,17 +126,17 @@
             android:layout_height="80dp">
             <ImageView
                 android:src="@drawable/major"
-                android:layout_width="30dp"
-                android:layout_height="30dp"/>
+                android:layout_width="25dp"
+                android:layout_height="25dp"/>
             <TextView
                 android:paddingLeft="10dp"
                 android:text="专       业"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/peopleMajor"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:paddingLeft="20dp"
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"
@@ -151,17 +154,17 @@
             android:layout_height="80dp">
             <ImageView
                 android:src="@drawable/registertime"
-                android:layout_width="30dp"
-                android:layout_height="30dp"/>
+                android:layout_width="25dp"
+                android:layout_height="25dp"/>
             <TextView
                 android:paddingLeft="10dp"
                 android:text="注册时间"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/peopleTime"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:paddingLeft="20dp"
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"
@@ -180,17 +183,17 @@
             android:layout_height="80dp">
             <ImageView
                 android:src="@drawable/phonenumber"
-                android:layout_width="30dp"
-                android:layout_height="30dp"/>
+                android:layout_width="25dp"
+                android:layout_height="25dp"/>
             <TextView
                 android:paddingLeft="10dp"
                 android:text="联系方式"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/peoplePhone"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:paddingLeft="20dp"
                 android:textColor="#1296db"
                 android:layout_width="wrap_content"
@@ -202,11 +205,12 @@
                 android:layout_height="wrap_content">
                 <ImageView
                     android:src="@drawable/call"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"/>
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"/>
                 <TextView
                     android:text="点击呼叫"
                     android:textColor="#1296db"
+                    android:textSize="12sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>

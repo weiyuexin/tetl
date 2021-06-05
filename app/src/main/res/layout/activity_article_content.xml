@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".ArticleContentActivity">
     <androidx.appcompat.widget.Toolbar
@@ -32,197 +33,205 @@
         android:layout_width="fill_parent"
         android:layout_height="7dp"
         android:background="#EEEEEE"/>
-    <LinearLayout
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout_article"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <LinearLayout
-            android:paddingLeft="10dp"
+        android:layout_height="match_parent">
+        <com.scwang.smart.refresh.header.ClassicsHeader
             android:layout_width="match_parent"
-            android:layout_height="50dp">
-            <top.weiyuexin.tetl.CircleImageView
-                android:id="@+id/article_head_pic"
-                android:layout_marginTop="5dp"
-                android:layout_centerInParent="true"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/head_img"/>
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
             <LinearLayout
                 android:paddingLeft="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-                <TextView
-                    android:text="骆伟培"
-                    android:id="@+id/contet_userName"
-                    android:textSize="20sp"
-                    android:textColor="@color/articleUserNameColor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"/>
-                <TextView
-                    android:text="2021.2.3"
-                    android:textSize="13sp"
-                    android:id="@+id/content_release_time"
-                    android:layout_width="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:layout_height="20dp"/>
+                android:layout_height="55dp">
+                <top.weiyuexin.tetl.CircleImageView
+                    android:id="@+id/article_head_pic"
+                    android:layout_marginTop="5dp"
+                    android:layout_centerInParent="true"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/head_img"/>
+                <LinearLayout
+                    android:paddingLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:text="骆伟培"
+                        android:id="@+id/contet_userName"
+                        android:textSize="20sp"
+                        android:textColor="@color/articleUserNameColor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"/>
+                    <TextView
+                        android:text="2021.2.3"
+                        android:textSize="13sp"
+                        android:id="@+id/content_release_time"
+                        android:layout_width="wrap_content"
+                        android:paddingBottom="5dp"
+                        android:layout_height="25dp"/>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/ll_content"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-            <TextView
-                android:text="hhhh"
-                android:padding="10dp"
-                android:id="@+id/content_article_content"
+            <LinearLayout
+                android:id="@+id/ll_content"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <TextView
+                    android:text="hhhh"
+                    android:padding="10dp"
+                    android:id="@+id/content_article_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="100dp"/>
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="#EEEEEE"/>
+                <LinearLayout
+                    android:paddingLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:text="评论"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+                        <TextView
+                            android:id="@+id/content_comment_sum"
+                            android:text="66"
+                            android:paddingLeft="5dp"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:text="赞"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+                        <TextView
+                            android:id="@+id/star_sum"
+                            android:text="99"
+                            android:paddingLeft="5dp"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <!--评论列表-->
+                <ListView
+                    android:padding="10dp"
+                    android:id="@+id/content_comment_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="100dp"/>
-            <ImageView
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="#EEEEEE"/>
+                android:background="@color/gray"
+                android:minHeight="80dp"
+                android:padding="10dp"
+                android:visibility="gone">
+                <EditText
+                    android:id="@+id/comment_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:background="@drawable/custom_edittext_background"
+                    android:layout_height="match_parent"
+                    android:hint="写评论..."/>
+                <TextView
+                    android:id="@+id/send_comment"
+                    android:text="发送"
+                    android:textSize="17sp"
+                    android:textColor="@color/send"
+                    android:gravity="center"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"/>
+
+            </LinearLayout>
             <LinearLayout
-                android:paddingLeft="10dp"
+                android:id="@+id/ll_bottom"
+                android:visibility="visible"
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:background="@color/gray"
+                android:layout_height="50dp">
                 <LinearLayout
-                    android:layout_width="60dp"
+                    android:id="@+id/shoucang"
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/article_collect"/>
                     <TextView
+                        android:text="收藏"
+                        android:textSize="13sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/comment"
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/comment"/>
+                    <TextView
+                        android:id="@+id/commentSum"
                         android:text="评论"
-                        android:gravity="center"
+                        android:textSize="13sp"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"/>
-                    <TextView
-                        android:id="@+id/content_comment_sum"
-                        android:text="66"
-                        android:paddingLeft="5dp"
                         android:gravity="center"
-                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"/>
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_width="60dp"
+                    android:id="@+id/star"
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/article_star"/>
                     <TextView
-                        android:text="赞"
-                        android:gravity="center"
+                        android:id="@+id/starSum"
+                        android:text="点赞"
+                        android:textSize="13sp"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"/>
-                    <TextView
-                        android:id="@+id/star_sum"
-                        android:text="99"
-                        android:paddingLeft="5dp"
                         android:gravity="center"
-                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"/>
+
                 </LinearLayout>
+
             </LinearLayout>
-            <!--评论列表-->
-            <ListView
-                android:padding="10dp"
-                android:id="@+id/content_comment_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/ll_comment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/gray"
-            android:minHeight="80dp"
-            android:padding="10dp"
-            android:visibility="gone">
-            <EditText
-                android:id="@+id/comment_content"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:background="@drawable/custom_edittext_background"
-                android:layout_height="match_parent"
-                android:hint="写评论..."/>
-            <TextView
-                android:id="@+id/send_comment"
-                android:text="发送"
-                android:textSize="17sp"
-                android:textColor="@color/send"
-                android:gravity="center"
-                android:layout_width="50dp"
-                android:layout_height="40dp"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/ll_bottom"
-            android:visibility="visible"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:background="@color/gray"
-            android:layout_height="50dp">
-            <LinearLayout
-                android:id="@+id/shoucang"
-                android:orientation="horizontal"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/article_collect"/>
-                <TextView
-                    android:text="收藏"
-                    android:textSize="13sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:gravity="center"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/comment"
-                android:orientation="horizontal"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/comment"/>
-                <TextView
-                    android:id="@+id/commentSum"
-                    android:text="评论"
-                    android:textSize="13sp"
-                    android:layout_width="wrap_content"
-                    android:gravity="center"
-                    android:layout_height="match_parent"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/star"
-                android:orientation="horizontal"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/article_star"/>
-                <TextView
-                    android:id="@+id/starSum"
-                    android:text="点赞"
-                    android:textSize="13sp"
-                    android:layout_width="wrap_content"
-                    android:gravity="center"
-                    android:layout_height="match_parent"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </LinearLayout>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

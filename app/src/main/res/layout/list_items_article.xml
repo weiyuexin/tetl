@@ -7,7 +7,7 @@
     <LinearLayout
         android:paddingLeft="10dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="55dp">
         <!--<ImageView
             android:layout_marginTop="5dp"
             android:id="@+id/head_pic"
@@ -24,7 +24,7 @@
         <LinearLayout
             android:paddingLeft="10dp"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="55dp"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/userName"
@@ -40,7 +40,7 @@
                 android:paddingBottom="5dp"
                 android:gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"/>
+                android:layout_height="25dp"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -55,6 +55,8 @@
             android:id="@+id/article_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLines="10"
+            android:ellipsize="end"
             android:minHeight="50dp"/>
         <ImageView
             android:layout_marginTop="10dp"

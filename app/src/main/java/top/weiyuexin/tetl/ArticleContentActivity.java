@@ -15,11 +15,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gyf.immersionbar.ImmersionBar;
+import com.scwang.smart.refresh.footer.BallPulseFooter;
+import com.scwang.smart.refresh.header.ClassicsHeader;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.constant.SpinnerStyle;
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ArticleContentActivity extends AppCompatActivity {
+
+    //自动刷新布局
+    private RefreshLayout refreshLayout_article;
     private Toolbar toolbar;
     //定义文章正文的线性布局
     private LinearLayout ll_content;
@@ -137,8 +146,9 @@ public class ArticleContentActivity extends AppCompatActivity {
 
 
         ImmersionBar.with(this)
-                .barColor(R.color.white)//同时自定义状态栏和导航栏颜色，不写默认状态栏为透明色，导航栏为黑色
+                .statusBarColor(R.color.white)     //状态栏颜色，不写默认透明色
                 .fitsSystemWindows(true)
+
                 .statusBarDarkFont(true, 0.2f) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
                 .init();
     }
@@ -161,6 +171,16 @@ public class ArticleContentActivity extends AppCompatActivity {
         content=findViewById(R.id.content_article_content);
         commentSum=findViewById(R.id.content_comment_sum);
         starSum=findViewById(R.id.star_sum);
+        refreshLayout_article=findViewById(R.id.refreshLayout_article);
+
+        //下拉刷新
+        refreshLayout_article.setRefreshHeader(new ClassicsHeader(this));
+        refreshLayout_article.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+            }
+        });
 
         /*将接受到的数据显示在对应的组件上*/
         if(data.getString("author") != null){
