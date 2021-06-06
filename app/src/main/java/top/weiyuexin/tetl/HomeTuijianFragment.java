@@ -52,6 +52,7 @@ public class HomeTuijianFragment extends Fragment {
     //保存数据库查询到的点赞数
     private ArrayList<Integer> starList = new ArrayList<>();
     private ArrayList<String> userNameList = new ArrayList<>();
+    //评论数
     //保存从数据库查询到的真实姓名
     private ArrayList<String> realNameList =new ArrayList<>();
     //保存从数据库查询到的评论总数
@@ -80,6 +81,7 @@ public class HomeTuijianFragment extends Fragment {
 
     //ListView
     private ListView list;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -149,7 +151,6 @@ public class HomeTuijianFragment extends Fragment {
         refreshLayout_tuijian=(RefreshLayout)view.findViewById(R.id.refreshLayout_tuijian);
         refreshLayout_tuijian.setRefreshHeader(new ClassicsHeader(getActivity()));
         refreshLayout_tuijian.autoRefresh();//自动刷新
-        refreshLayout_tuijian.autoLoadMore();//自动加载
         refreshLayout_tuijian.setDisableContentWhenRefresh(true);//是否在刷新的时候禁止列表的操作
         //设置 Footer 为 球脉冲 样式
         refreshLayout_tuijian.setRefreshFooter(new BallPulseFooter(getActivity()).setSpinnerStyle(SpinnerStyle.Scale));
@@ -164,7 +165,7 @@ public class HomeTuijianFragment extends Fragment {
         refreshLayout_tuijian.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadMore(1000/*,false*/);//传入false表示加载失败
+                refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
             }
         });
     }
@@ -192,7 +193,7 @@ public class HomeTuijianFragment extends Fragment {
                         "root","Weiyuexin@123456");
                 Statement statement=connection.createStatement();
                 //mysql简单查询语句
-                ResultSet resultSet=statement.executeQuery("SELECT * FROM article ORDER BY time desc");
+                ResultSet resultSet=statement.executeQuery("SELECT * FROM article ORDER BY id desc");
 
                 //将查询到的数据保存的LISt中
                 while (resultSet.next()){
@@ -215,6 +216,7 @@ public class HomeTuijianFragment extends Fragment {
                 }
             }catch (Exception e){
                 error = e.toString();
+                System.out.println(error);
             }
             return null;
         }
@@ -223,7 +225,7 @@ public class HomeTuijianFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             HomeArticleAdapter homeArticleAdapter=new HomeArticleAdapter(idList,typeList,contentList,imgList,
-                    authorIdList,releaseTimeList,starList,userNameList,realNameList);
+                    authorIdList,releaseTimeList,starList,userNameList,realNameList,commentNumList);
             list.setAdapter(homeArticleAdapter);
             //System.out.println(contentList);
             list.setVisibility(View.VISIBLE);
@@ -257,12 +259,13 @@ public class HomeTuijianFragment extends Fragment {
         private ArrayList<Integer> shoucangList=new ArrayList<>();
         //保存点赞的状态，同上
         private ArrayList<Integer> isStaredList=new ArrayList<>();
+        private ArrayList<Integer> commentSumList=new ArrayList<>();
 
         public HomeArticleAdapter(ArrayList<Integer> id,ArrayList<String > type,
                                   ArrayList<String> content,ArrayList<String> img,
                                   ArrayList<Integer> authonid,ArrayList<String> releaseTime,
                                   ArrayList<Integer> star,ArrayList<String> userName,
-                                  ArrayList<String> realName) {
+                                  ArrayList<String> realName,ArrayList<Integer> comment) {
             this.idList=id;
             this.typeList=type;
             this.contentList=content;
@@ -272,6 +275,7 @@ public class HomeTuijianFragment extends Fragment {
             this.starList=star;
             this.userNameList=userName;
             this.realNameList=realName;
+            this.commentSumList=comment;
             //初始化是否收藏标志列表和是否点赞标志位列表，默认是0
             for (int i=0;i<idList.size();i++){
                 shoucangList.add(0);
@@ -379,6 +383,8 @@ public class HomeTuijianFragment extends Fragment {
 
             //定义评论按钮
             LinearLayout comment=view.findViewById(R.id.comment);
+            //评论数量显示TextView
+            TextView comment_sum=view.findViewById(R.id.commentsum);
             //点击评论后的事件
             comment.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -386,6 +392,9 @@ public class HomeTuijianFragment extends Fragment {
                     Toast.makeText(getActivity(),"评论功能升级中，敬请期待",Toast.LENGTH_SHORT).show();
                 }
             });
+            if(commentSumList.get(position)>0){
+                comment_sum.setText(commentSumList.get(position).toString());
+            }
             //定义点赞按钮
             LinearLayout star=view.findViewById(R.id.star);
             //判断是否已经点赞，点赞后点赞数加一，存入数据库

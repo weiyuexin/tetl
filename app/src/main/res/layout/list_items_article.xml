@@ -98,7 +98,7 @@
                     android:layout_height="25dp"
                     android:src="@drawable/comment"/>
                 <TextView
-                    android:id="@+id/commentSum"
+                    android:id="@+id/commentsum"
                     android:text="评论"
                     android:textSize="13sp"
                     android:layout_width="wrap_content"
