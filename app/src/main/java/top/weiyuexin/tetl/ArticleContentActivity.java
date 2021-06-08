@@ -209,8 +209,8 @@ public class ArticleContentActivity extends AppCompatActivity {
                 for(int i=0;i<=authorIdList.size()+1;i++){
                     ResultSet findRealAuthor=statement.executeQuery("SELECT * FROM user WHERE id="+authorIdList.get(i));
                     while (findRealAuthor.next()){
-                        authorRealNameList.add(findRealAuthor.getString("userName"));
-                        authorUserNameList.add(findRealAuthor.getString("realName"));
+                        authorRealNameList.add(findRealAuthor.getString("realName"));
+                        authorUserNameList.add(findRealAuthor.getString("userName"));
                     }
                 }
             }catch (Exception e){
@@ -223,7 +223,7 @@ public class ArticleContentActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            MyAdapter commentAdapter=new MyAdapter(authorRealNameList,authorUserNameList,commentTimeList,commentContentList,commentStarsList);
+            MyAdapter commentAdapter=new MyAdapter(authorRealNameList,authorUserNameList,commentTimeList, commentContentList,commentStarsList,authorIdList);
             content_comment_list.setAdapter(commentAdapter);
             content_comment_list.setVisibility(View.VISIBLE);
             commentAdapter.notifyDataSetInvalidated();
@@ -297,15 +297,18 @@ public class ArticleContentActivity extends AppCompatActivity {
         private ArrayList<String> commentContentList=new ArrayList<>();
         //保存评论点赞数
         private ArrayList<Integer> commentStarsList=new ArrayList<>();
+        //保存评论作者id
+        private ArrayList<Integer> authorIdList=new ArrayList<>();
 
         public MyAdapter(ArrayList<String> realname,ArrayList<String> username,
                          ArrayList<String> time,ArrayList<String> content,
-                         ArrayList<Integer> star){
+                         ArrayList<Integer> star,ArrayList<Integer> authorId){
             this.authorRealNameList=realname;
             this.authorUserNameList=username;
             this.commentTimeList=time;
             this.commentContentList=content;
             this.commentStarsList=star;
+            this.authorIdList=authorId;
         }
 
         @Override
@@ -332,7 +335,9 @@ public class ArticleContentActivity extends AppCompatActivity {
             TextView commentSum=view.findViewById(R.id.commentStarSum);
             TextView commentContent=view.findViewById(R.id.commentContent);
             TextView commentTime=view.findViewById(R.id.commentTime);
+            ImageView comment_head_pic=view.findViewById(R.id.comment_head_pic);
 
+            System.out.println(authorRealNameList);
             if(authorRealNameList.get(position)!=null){
                 comment_authorName.setText(authorRealNameList.get(position).toString());
             }else {
@@ -343,6 +348,41 @@ public class ArticleContentActivity extends AppCompatActivity {
             }
             commentContent.setText(commentContentList.get(position).toString());
             commentTime.setText(commentTimeList.get(position).toString());
+
+            //点击头像跳转到作者详情页
+            comment_head_pic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //初始化意图
+                    Intent intent1=new Intent(ArticleContentActivity.this,PersonalInformationDetailsPageActivity.class);
+                    //传递数据信息
+                    Bundle bundle=new Bundle();
+                    bundle.putInt("id",authorIdList.get(position));
+
+                    intent1.putExtras(bundle);
+                    //激活意图
+                    startActivity(intent1);
+                    //改变activity切换动画
+                    overridePendingTransition(R.anim.slide_in_right,R.anim.anim_no);
+                }
+            });
+            //点击昵称跳转到作者详情页
+            comment_authorName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //初始化意图
+                    Intent intent1=new Intent(ArticleContentActivity.this,PersonalInformationDetailsPageActivity.class);
+                    //传递数据信息
+                    Bundle bundle=new Bundle();
+                    bundle.putInt("id",authorIdList.get(position));
+
+                    intent1.putExtras(bundle);
+                    //激活意图
+                    startActivity(intent1);
+                    //改变activity切换动画
+                    overridePendingTransition(R.anim.slide_in_right,R.anim.anim_no);
+                }
+            });
 
             return view;
         }

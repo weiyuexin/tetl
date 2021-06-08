@@ -69,11 +69,11 @@
             android:text="2021-05-12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        <ImageView
+      <!--  <ImageView
             android:layout_marginTop="10dp"
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:background="#EEEEEE"/>
+            android:background="#EEEEEE"/>-->
     </LinearLayout>
 
 </LinearLayout>
