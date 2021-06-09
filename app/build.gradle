@@ -39,6 +39,7 @@ dependencies {
     implementation 'androidx.viewpager:viewpager:1.0.0'
     implementation files('src\\main\\libs\\mysql-connector-java-5.1.30-bin.jar')
     implementation files('libs\\mysql-connector-java-5.1.30-bin.jar')
+    implementation files('libs\\GifView.jar')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -65,5 +66,8 @@ dependencies {
     implementation  'com.scwang.smart:refresh-header-two-level:2.0.3'   //二级刷新头
     implementation  'com.scwang.smart:refresh-footer-ball:2.0.3'        //球脉冲加载
     implementation  'com.scwang.smart:refresh-footer-classics:2.0.3'    //经典加载
+
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.6'
+
 
 }

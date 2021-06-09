@@ -180,6 +180,7 @@
             android:layout_height="2dp"
             android:background="#EEEEEE"/>
         <LinearLayout
+            android:id="@+id/ll_profile_about"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:gravity="left|center"

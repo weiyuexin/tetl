@@ -1,5 +1,6 @@
 package top.weiyuexin.tetl;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
@@ -20,6 +22,7 @@ public class ProfileFragment extends Fragment {
 
     private ImageView h_back;
     private ImageView h_head;
+    private LinearLayout ll_profile_about;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,7 +37,18 @@ public class ProfileFragment extends Fragment {
         Glide.with(getActivity()).load(R.drawable.head_img)
                 .bitmapTransform(new CropCircleTransformation(getActivity()))
                 .into(h_head);
-
+        //初始化关于按钮
+        ll_profile_about=view.findViewById(R.id.ll_profile_about);
+        //点击关于，跳转到详情页面
+        ll_profile_about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(),AboutUsActivity.class);
+                startActivity(intent);
+                //改变切换动画
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.anim_no);
+            }
+        });
 
         return view;
     }
