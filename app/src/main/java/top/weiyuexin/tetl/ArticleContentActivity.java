@@ -4,12 +4,15 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -127,7 +130,44 @@ public class ArticleContentActivity extends AppCompatActivity {
         send_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String commentContent;
+                commentContent=comment_comment.getText().toString();
+                System.out.println(commentContent);
+                //获取当前时间
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// HH:mm:ss
+                Date date = new Date(System.currentTimeMillis());
+                String nowTime;
+                nowTime=simpleDateFormat.format(date);
+                //获取作者的id
+                Integer authorId=1;
+                //新建线程，将评论保存到数据库
+                final int[] count = {0};
+                new Thread(){
+                    @Override
+                    public void run() {
+                        try {
+                            //动态加载类
+                            Class.forName("com.mysql.jdbc.Driver");
+                            Connection connection= DriverManager.getConnection("jdbc:mysql://1.15.60.193:3306/Android?useUnicode=true&characterEncoding=utf8",
+                                    "root","Weiyuexin@123456");//加入后面的一串是为了解决插入数据库时的中文乱码
+                            Statement statement=connection.createStatement();
+                            //发布文章
+                            boolean resultSet=statement.execute("INSERT INTO comment(articleId,commentContent,authorId,time) VALUES('"+articleId+"','"+commentContent+"','"+authorId+"','"+nowTime+"');");
+                        }catch (Exception e){
+                            String error;
+                            error = e.toString();
+                            System.out.println(error);
+                        }
+                        while (count[0] <=10){
 
+                            try{
+                                Thread.sleep(100);
+                            }catch (InterruptedException e){
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }.start();//开启线程
                 Toast.makeText(ArticleContentActivity.this,"评论成功",Toast.LENGTH_SHORT).show();
             }
         });
@@ -386,6 +426,51 @@ public class ArticleContentActivity extends AppCompatActivity {
 
             return view;
         }
+    }
+
+    /**
+     重写dispatchTouchEvent
+     * 点击软键盘外面的区域关闭软键盘
+     * @param ev
+     * @return
+     */
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            // 获得当前得到焦点的View，
+            View v = getCurrentFocus();
+            if (isShouldHideInput(v, ev)) {
+                //根据判断关闭软键盘
+                InputMethodManager imm = (InputMethodManager)getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            }
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    /**
+     * 判断用户点击的区域是否是输入框
+     *
+     * @param v
+     * @param event
+     * @return
+     */
+    private boolean isShouldHideInput(View v, MotionEvent event) {
+        if (v != null && (v instanceof EditText)) {
+            int[] l = { 0, 0 };
+            v.getLocationInWindow(l);
+            int left = l[0], top = l[1], bottom = top + v.getHeight(), right = left
+                    + v.getWidth();
+            if (event.getX() > left && event.getX() < right
+                    && event.getY() > top && event.getY() < bottom) {
+                // 点击EditText的事件，忽略它。
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 
 
