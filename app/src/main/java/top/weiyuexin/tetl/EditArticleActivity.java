@@ -76,26 +76,6 @@ public class EditArticleActivity extends AppCompatActivity {
                             .setPositiveButton("发布", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    /*new Thread(){
-                                        @Override
-                                        public void run() {
-                                            try {
-                                                //动态加载类
-                                                Class.forName("com.mysql.jdbc.Driver");
-                                                Connection connection= DriverManager.getConnection("jdbc:mysql://1.15.60.193:3306/Android?useUnicode=true&characterEncoding=utf8",
-                                                        "root","Weiyuexin@123456");//加入后面的一串是为了解决插入数据库时的中文乱码
-                                                Statement statement=connection.createStatement();
-                                                //发布文章
-                                                System.out.println(type);
-                                                boolean resultSet=statement.execute("INSERT INTO article(type,content,author,time) VALUES('"+type+"','"+content+"','"+authorId+"','"+nowTime+"');");
-                                            }catch (Exception e){
-                                                String error;
-                                                error = e.toString();
-                                                System.out.println(error);
-                                            }
-                                        }
-                                    }.start();//开启线程*/
-
                                     /*定义进度条对话框*/
                                     ProgressDialog ProDialog = new ProgressDialog(EditArticleActivity.this);
                                     ProDialog.setIcon(R.drawable.publish);

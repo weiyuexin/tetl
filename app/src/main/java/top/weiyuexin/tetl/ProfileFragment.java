@@ -23,6 +23,7 @@ public class ProfileFragment extends Fragment {
     private ImageView h_back;
     private ImageView h_head;
     private LinearLayout ll_profile_about;
+    private LinearLayout ll_profile_message;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,6 +45,19 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(),AboutUsActivity.class);
+                startActivity(intent);
+                //改变切换动画
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.anim_no);
+            }
+        });
+
+        //初始化个人信息布局按钮
+        ll_profile_message=view.findViewById(R.id.ll_profile_message);
+        //点击个人信息，跳转到详情页面
+        ll_profile_message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(),ProfileMessage.class);
                 startActivity(intent);
                 //改变切换动画
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.anim_no);

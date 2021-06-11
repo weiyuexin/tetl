@@ -127,6 +127,7 @@ public class ArticleContentActivity extends AppCompatActivity {
         send_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Toast.makeText(ArticleContentActivity.this,"评论成功",Toast.LENGTH_SHORT).show();
             }
         });
@@ -165,14 +166,6 @@ public class ArticleContentActivity extends AppCompatActivity {
             }
         });
 
-        /*//获取当前时间
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");// HH:mm:ss
-        //获取当前时间
-        Date date = new Date(System.currentTimeMillis());
-        String nowTime;
-        nowTime=simpleDateFormat.format(date);
-        System.out.println(nowTime);*/
-
         ImmersionBar.with(this)
                 .statusBarColor(R.color.white)     //状态栏颜色，不写默认透明色
                 .fitsSystemWindows(true)
@@ -183,12 +176,17 @@ public class ArticleContentActivity extends AppCompatActivity {
     }
 
     class Task extends AsyncTask<Void,Void,Void> {
-
-
         String error="";
-        //清空原始数据，主要是刷新时
         @Override
         protected Void doInBackground(Void... voids) {
+            //清空原始数据，主要是刷新时
+            commentIdList.clear();
+            authorIdList.clear();
+            commentTimeList.clear();
+            commentContentList.clear();
+            commentStarsList.clear();
+            authorRealNameList.clear();
+            authorUserNameList.clear();
             try {
                 //动态加载类
                 Class.forName("com.mysql.jdbc.Driver");
@@ -262,6 +260,8 @@ public class ArticleContentActivity extends AppCompatActivity {
         refreshLayout_article.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
+                //新建异步线程，链接查询数据库
+                new Task().execute();
                 refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
             }
         });
