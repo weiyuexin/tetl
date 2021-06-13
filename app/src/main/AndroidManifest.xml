@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.TETL">
-        <activity android:name=".ProfileMessage"></activity>
+        <activity android:name=".MyIssueActivity"></activity>
+        <activity android:name=".ProfileMessage" />
         <activity android:name=".AboutUsActivity" />
         <activity android:name=".EditArticleActivity" />
         <activity android:name=".PersonalInformationDetailsPageActivity" />

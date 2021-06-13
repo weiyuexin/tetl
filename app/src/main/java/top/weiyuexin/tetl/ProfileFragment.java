@@ -24,6 +24,7 @@ public class ProfileFragment extends Fragment {
     private ImageView h_head;
     private LinearLayout ll_profile_about;
     private LinearLayout ll_profile_message;
+    private LinearLayout ll_myIssue;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,6 +59,20 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(),ProfileMessage.class);
+                startActivity(intent);
+                //改变切换动画
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.anim_no);
+            }
+        });
+
+        //初始化我的发布布局按钮
+        ll_myIssue=view.findViewById(R.id.ll_myIssue);
+        //设置我的发布点击事件
+        ll_myIssue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),MyIssueActivity.class);
+
                 startActivity(intent);
                 //改变切换动画
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.anim_no);
