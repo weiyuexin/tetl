@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#efefef"
+    tools:context=".EditFeedBack">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_EditFeedBack"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/gray"
+        app:navigationIcon="@drawable/back"
+        android:isScrollContainer="true"
+        app:titleTextColor="#ff0000"
+        app:titleMarginStart="100dp">
+        <TextView
+            android:text="帮助与反馈"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="问题和意见"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp" />
+
+    <RelativeLayout
+        android:id="@+id/textviewLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <!--在我们的这个位置的话就是设置我们的相关的输入框-->
+        <EditText
+            android:id="@+id/my_suggess_submit"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:hint="请填写十个文字以上的问题描述以便我们提供更好的服务！"
+            android:background="@drawable/edie_background"
+            android:gravity="start|top|right" />
+        <TextView
+            android:id="@+id/allowedTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_below="@+id/my_suggess_submit"
+            android:text="/200"
+            android:layout_alignParentRight="true" />
+        <TextView
+            android:id="@+id/currentNumberTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/allowedTV"
+            android:layout_toLeftOf="@+id/allowedTV"
+            android:layout_below="@+id/my_suggess_submit"
+            android:text="0"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/telTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="联系电话"
+        android:textSize="20sp"/>
+    <EditText
+        android:id="@+id/telenumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/telTV"
+        android:paddingLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:textSize="20sp"
+        android:background="@drawable/edie_background"
+        android:gravity="start|top|right"
+        android:hint="选填"/>
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="提交"
+        android:textSize="30sp"
+        android:backgroundTint="#FFC0CB"
+        android:gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="#FFC0CB"
+        android:textColor="@color/white"/>
+
+
+
+</LinearLayout>

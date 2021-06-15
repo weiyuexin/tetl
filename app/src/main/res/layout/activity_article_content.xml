@@ -172,17 +172,19 @@
                 android:background="@color/gray"
                 android:layout_height="50dp">
                 <LinearLayout
-                    android:id="@+id/shoucang"
+                    android:id="@+id/ll_shoucang"
                     android:orientation="horizontal"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:layout_height="match_parent">
                     <ImageView
+                        android:id="@+id/iv_shoucang"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/article_collect"/>
                     <TextView
+                        android:id="@+id/tv_shoucang"
                         android:text="收藏"
                         android:textSize="13sp"
                         android:layout_width="wrap_content"
@@ -210,18 +212,19 @@
                         android:layout_height="match_parent"/>
                 </LinearLayout>
                 <LinearLayout
-                    android:id="@+id/star"
+                    android:id="@+id/ll_star"
                     android:orientation="horizontal"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:layout_height="match_parent">
                     <ImageView
+                        android:id="@+id/iv_star"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:src="@drawable/article_star"/>
                     <TextView
-                        android:id="@+id/starSum"
+                        android:id="@+id/tv_starSum"
                         android:text="点赞"
                         android:textSize="13sp"
                         android:layout_width="wrap_content"

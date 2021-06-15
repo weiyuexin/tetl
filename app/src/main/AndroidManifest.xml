@@ -17,7 +17,15 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.TETL">
-        <activity android:name=".MyIssueActivity"></activity>
+        <activity android:name=".Setting"></activity>
+        <activity android:name=".successuggestActivity" />
+        <activity android:name=".EditFeedBack" />
+        <activity android:name=".HelpandFeedBackFourActivity" />
+        <activity android:name=".HelpandFeedBackThreeActivity" />
+        <activity android:name=".HelpandFeedBackTwoActivity" />
+        <activity android:name=".HelpandFeedBackOneActivity" />
+        <activity android:name=".HelpandFeedBack" />
+        <activity android:name=".MyIssueActivity" />
         <activity android:name=".ProfileMessage" />
         <activity android:name=".AboutUsActivity" />
         <activity android:name=".EditArticleActivity" />

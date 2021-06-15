@@ -19,6 +19,7 @@ import java.io.InputStream;
 public class AboutUsActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

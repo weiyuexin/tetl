@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".HelpandFeedBackThreeActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_HelpandFeedBackThree"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/gray"
+        app:navigationIcon="@drawable/back"
+        android:isScrollContainer="true"
+        app:titleTextColor="#ff0000"
+        app:titleMarginStart="100dp">
+        <TextView
+            android:text="问题详情"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="【登录】换绑手机怎么办？"
+            android:layout_marginTop="20dp"
+            android:textSize="24dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1、如果在登陆状态,可以点击“我的”-右上角设置-账号绑定,更换手机号哟！"
+            android:textSize="24dp"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2、如果新手机号一键登录了,可以在我的大学中绑定校内账号,会提示你有原手机号绑定,直接进行换绑操作即可。"
+            android:textSize="24dp"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3、如果同时新手机号一键登陆了,又忘记校内密码了。先联系辅导员/学校信息中心老师进行重置密码；然后用账号密码登陆后换绑哦~"
+            android:textSize="24dp"
+            android:layout_marginTop="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="bottom">
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="没解决？"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="我要反馈"
+                android:textSize="18dp"
+                android:textColor="#FF0033"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

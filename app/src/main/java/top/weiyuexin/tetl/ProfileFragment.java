@@ -25,6 +25,8 @@ public class ProfileFragment extends Fragment {
     private LinearLayout ll_profile_about;
     private LinearLayout ll_profile_message;
     private LinearLayout ll_myIssue;
+    private LinearLayout ll_helpAndFeedBack;
+    private LinearLayout ll_setting;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,6 +75,30 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),MyIssueActivity.class);
 
+                startActivity(intent);
+                //改变切换动画
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.anim_no);
+            }
+        });
+
+        //帮助与反馈
+        ll_helpAndFeedBack=view.findViewById(R.id.ll_helpAndFeedBack);
+        ll_helpAndFeedBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getActivity(),HelpandFeedBack.class);
+                startActivity(intent);
+                //改变切换动画
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.anim_no);
+            }
+        });
+
+        //设置
+        ll_setting=view.findViewById(R.id.ll_setting);
+        ll_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getActivity(),Setting.class);
                 startActivity(intent);
                 //改变切换动画
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.anim_no);

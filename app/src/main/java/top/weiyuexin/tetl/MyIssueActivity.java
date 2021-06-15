@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -72,6 +74,34 @@ public class MyIssueActivity extends AppCompatActivity {
         authorId=1;
         //新建异步线程，链接查询数据库
         new Task().execute();
+        click();
+    }
+
+    private void click() {
+        ll_myIssue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //初始化意图对象
+                Intent intent=new Intent(MyIssueActivity.this,ArticleContentActivity.class);
+                //传递数据信息
+                Bundle data=new Bundle();
+                data.putInt("id",idList.get(position));
+                //data.putInt("authorid",authorIdList.get(position));
+                data.putString("type",typeList.get(position));
+                data.putString("content",contentList.get(position));
+                data.putString("author",realNameList.get(position));
+                data.putString("username",userNameList.get(position));
+                data.putInt("starSum",starList.get(position));
+                data.putInt("commentSum",commentNumList.get(position));
+                data.putString("time",releaseTimeList.get(position));
+                intent.putExtras(data);
+
+                //激活意图
+                startActivity(intent);
+                //改变activity切换动画
+                overridePendingTransition(R.anim.slide_in_right,R.anim.anim_no);
+            }
+        });
     }
 
     class Task extends AsyncTask<Void,Void,Void> {

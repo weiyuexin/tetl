@@ -27,8 +27,6 @@ public class ProfileMessage extends AppCompatActivity {
 
     private void initView() {
         toolbar_profile_message=findViewById(R.id.toolbar_profile_message);
-
-
         toolbar_profile_message.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

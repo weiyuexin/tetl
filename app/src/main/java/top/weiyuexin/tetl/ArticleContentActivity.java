@@ -67,6 +67,15 @@ public class ArticleContentActivity extends AppCompatActivity {
     private TextView commentSum;
     //定义点赞总数显示组件
     private TextView starSum;
+    //收藏按钮
+    private LinearLayout ll_shoucang;
+    private ImageView iv_shoucang;
+    private TextView tv_shoucang;
+    //点赞
+    private LinearLayout ll_star;
+    private ImageView iv_star;
+    private TextView tv_starSum;
+    
     //评论列表
     private ListView content_comment_list;
     private int articleId;
@@ -291,6 +300,27 @@ public class ArticleContentActivity extends AppCompatActivity {
         commentSum=findViewById(R.id.content_comment_sum);
         starSum=findViewById(R.id.star_sum);
         refreshLayout_article=findViewById(R.id.refreshLayout_article);
+        ll_shoucang=findViewById(R.id.ll_shoucang);
+        iv_shoucang=findViewById(R.id.iv_shoucang);
+        //定义点击收藏后的事件
+        ll_shoucang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iv_shoucang.setSelected(true);
+                Toast.makeText(ArticleContentActivity.this,"收藏成功!",Toast.LENGTH_SHORT).show();
+            }
+        });
+        //点赞
+        ll_star=findViewById(R.id.ll_star);
+        iv_star=findViewById(R.id.iv_star);
+        tv_starSum=findViewById(R.id.tv_starSum);
+        ll_star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iv_star.setSelected(true);
+                Toast.makeText(ArticleContentActivity.this,"点赞成功!",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //评论列表
         content_comment_list=findViewById(R.id.content_comment_list);
