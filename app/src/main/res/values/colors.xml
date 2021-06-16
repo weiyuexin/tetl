@@ -15,4 +15,9 @@
     <color name="articleUserNameColor">#D66C26</color>
     <color name="send">#FDCD9B</color>
     <color name="pink">#FFC0CB</color>
+    <color name="touming">#11512124</color>
+    <color name="register_color">#00ACC1</color>
+    <color name="transparent">#00000000</color>
+    <color name="grey">#7A7676</color>
+    <color name="purple">#E680F8</color>
 </resources>

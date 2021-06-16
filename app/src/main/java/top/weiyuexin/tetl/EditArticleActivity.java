@@ -95,7 +95,6 @@ public class EditArticleActivity extends AppCompatActivity {
                                                         "root","Weiyuexin@123456");//加入后面的一串是为了解决插入数据库时的中文乱码
                                                 Statement statement=connection.createStatement();
                                                 //发布文章
-                                                System.out.println(type);
                                                 boolean resultSet=statement.execute("INSERT INTO article(type,content,author,time) VALUES('"+type+"','"+content+"','"+authorId+"','"+nowTime+"');");
                                             }catch (Exception e){
                                                 String error;

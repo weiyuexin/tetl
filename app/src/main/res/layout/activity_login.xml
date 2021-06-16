@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@mipmap/splash_background"
+    android:orientation="vertical"
+    tools:context=".Login">
+
+    <ImageView
+        android:layout_width="164dp"
+        android:layout_height="164dp"
+        android:src="@drawable/symbol2" />
+
+
+    <EditText
+        android:id="@+id/et_login_phone"
+        android:layout_width="@dimen/d5"
+        android:layout_height="@dimen/d4"
+        android:layout_marginTop="@dimen/d2"
+        android:background="@drawable/bg_edit"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:padding="10sp"
+        android:paddingLeft="30sp"
+        android:paddingTop="10sp"
+        android:paddingRight="15sp"
+        android:paddingBottom="15sp"
+        android:hint="@string/user_name"
+        android:textColor="@color/grey" />
+
+    <EditText
+        android:id="@+id/et_login_password"
+        android:layout_width="@dimen/d5"
+        android:layout_height="@dimen/d4"
+        android:layout_marginTop="@dimen/d3"
+        android:background="@drawable/bg_edit"
+        android:ems="10"
+        android:inputType="textVisiblePassword"
+        android:padding="10sp"
+        android:paddingLeft="30sp"
+        android:paddingTop="10sp"
+        android:paddingRight="15sp"
+        android:paddingBottom="15sp"
+        android:hint="@string/password"
+        android:textColor="@color/grey" />
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="@dimen/d5"
+        android:layout_height="@dimen/d4"
+        android:layout_marginTop="@dimen/d3"
+        android:background="@drawable/bg_edit1"
+        android:text="@string/click_to_enter"
+        android:textSize="@dimen/s1"
+        android:visibility="visible"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/register_button"
+        android:layout_width="@dimen/d5"
+        android:layout_height="@dimen/d4"
+        android:layout_marginTop="@dimen/d3"
+        android:text="@string/click_to_register"
+        android:textSize="@dimen/s1"
+        android:background="@drawable/bg_edit1" />
+</LinearLayout>
