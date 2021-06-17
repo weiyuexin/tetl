@@ -71,8 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/profile_phonenumber"
-                    android:text="12345678910"
+                    android:id="@+id/tv_phonenumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -83,6 +82,7 @@
             android:layout_height="1dp"
             android:background="#EEEEEE"/>
         <LinearLayout
+            android:id="@+id/ll_sex"
             android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="50dp">
@@ -98,8 +98,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/profile_sex"
-                    android:text="男"
+                    android:id="@+id/tv_sex"
+                    android:text="选择性别"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <ImageView
@@ -114,6 +114,7 @@
             android:layout_height="1dp"
             android:background="#EEEEEE"/>
         <LinearLayout
+            android:id="@+id/ll_username"
             android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="50dp">
@@ -129,8 +130,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/profile_username"
-                    android:text="hhhhh"
+                    android:id="@+id/tv_username"
+                    android:text="点击修改昵称"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <ImageView
@@ -145,6 +146,7 @@
             android:layout_height="1dp"
             android:background="#EEEEEE"/>
         <LinearLayout
+            android:id="@+id/ll_realname"
             android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="50dp">
@@ -160,8 +162,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/profile_realname"
-                    android:text="张三"
+                    android:id="@+id/tv_realname"
+                    android:text="点击完善"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <ImageView
@@ -176,6 +178,7 @@
             android:layout_height="1dp"
             android:background="#EEEEEE"/>
         <LinearLayout
+            android:id="@+id/ll_studentnumber"
             android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="50dp">
@@ -191,8 +194,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/profile_studentnumber"
-                    android:text="1912020064"
+                    android:id="@+id/tv_studentnumber"
+                    android:text="点击完善"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <ImageView
@@ -207,6 +210,7 @@
             android:layout_height="1dp"
             android:background="#EEEEEE"/>
         <LinearLayout
+            android:id="@+id/ll_college"
             android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="50dp">
@@ -222,8 +226,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/profile_college"
-                    android:text="计算机与信息工程学院"
+                    android:id="@+id/tv_college"
+                    android:text="点击完善"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <ImageView
@@ -238,6 +242,7 @@
             android:layout_height="1dp"
             android:background="#EEEEEE"/>
         <LinearLayout
+            android:id="@+id/ll_major"
             android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="50dp">
@@ -253,14 +258,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/profile_sex"
-                    android:text="计算机科学与技术"
+                    android:id="@+id/tv_major"
+                    android:text="点击完善"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <ImageView
                     android:src="@drawable/right"
                     android:layout_width="15dp"
                     android:layout_height="20dp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#EEEEEE"/>
+        <LinearLayout
+            android:id="@+id/ll_registerTime"
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <TextView
+                android:text="注册时间"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+            <LinearLayout
+                android:gravity="right"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_releaseTime"
+                    android:text="2021-05-12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
         </LinearLayout>
         <ImageView

@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -71,7 +73,10 @@ public class MyIssueActivity extends AppCompatActivity {
             }
         });
 
-        authorId=1;
+        //获取作者的id
+        SharedPreferences sharedPreferences= getSharedPreferences("user",
+                Activity.MODE_PRIVATE);
+        authorId =sharedPreferences.getInt("id",1);
         //新建异步线程，链接查询数据库
         new Task().execute();
         click();
@@ -138,6 +143,7 @@ public class MyIssueActivity extends AppCompatActivity {
                     starList.add(resultSet.getInt("star"));
                     commentNumList.add(resultSet.getInt("comment"));
                 }
+                System.out.println(typeList);
                 //查询作者信息
                 for(int i=0;i<=idList.size()+1;i++){
                     ResultSet findRealAuthor=statement.executeQuery("SELECT * FROM user WHERE id="+authorId);

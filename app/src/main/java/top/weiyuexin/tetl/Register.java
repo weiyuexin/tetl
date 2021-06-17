@@ -26,6 +26,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Register extends AppCompatActivity {
@@ -34,6 +35,7 @@ public class Register extends AppCompatActivity {
     private EditText register_password;
     private EditText register_pwd;
     private EditText register_code;
+    private EditText register_username;
     private Button btn_verify;
     private ImageView image;
     private Button register_button;
@@ -43,9 +45,11 @@ public class Register extends AppCompatActivity {
     private CodeUtils codeUtils;
 
     private String phoneNumber;
+    private String username;
     private String password;
     private String passwordAgain;
     private String verificationcode;
+    private ArrayList<String> phoneList=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +64,7 @@ public class Register extends AppCompatActivity {
 
     private void initView() {
         register_phone=findViewById(R.id.register_phone);
+        register_username=findViewById(R.id.register_username);
         register_password=findViewById(R.id.register_password);
         register_pwd=findViewById(R.id.register_pwd);
         register_code=findViewById(R.id.register_code);
@@ -92,11 +97,18 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 phoneNumber=register_phone.getText().toString();
+                username=register_username.getText().toString();
                 password=register_password.getText().toString();
                 passwordAgain=register_pwd.getText().toString();
                 verificationcode=register_code.getText().toString();
-                if(TextUtils.isEmpty(phoneNumber)){
+                //调用异步线程，查询手机号是否注册
+                new Task1().execute();
+                if(phoneList.contains(phoneNumber)){
+                    Toast.makeText(Register.this,"该手机号已注册,请前往登录",Toast.LENGTH_SHORT).show();
+                }else if(TextUtils.isEmpty(phoneNumber)){
                     Toast.makeText(Register.this,"请输入手机号",Toast.LENGTH_SHORT).show();
+                }else if(TextUtils.isEmpty(username)){
+                    Toast.makeText(Register.this,"请输入昵称",Toast.LENGTH_SHORT).show();
                 }else if(TextUtils.isEmpty(password)){
                     Toast.makeText(Register.this,"请输入密码",Toast.LENGTH_SHORT).show();
                 }else if(TextUtils.isEmpty(passwordAgain)){
@@ -116,6 +128,36 @@ public class Register extends AppCompatActivity {
         });
 
     }
+    /*实现查询手机号是否已经注册的异步线程*/
+    class Task1 extends AsyncTask<Void,Void,Void> implements top.weiyuexin.tetl.Task1 {
+
+        String error = "";
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            phoneList.clear();
+            try {
+                //动态加载类
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection connection = DriverManager.getConnection("jdbc:mysql://1.15.60.193:3306/Android",
+                        "root", "Weiyuexin@123456");
+                Statement statement = connection.createStatement();
+                //mysql简单查询语句
+                ResultSet resultSet = statement.executeQuery("SELECT phoneNumber FROM user ORDER BY id desc");
+
+                //将查询到的数据保存的LISt中
+                while (resultSet.next()) {
+                    phoneList.add(resultSet.getString("phoneNumber"));
+                }
+            } catch (Exception e) {
+                error = e.toString();
+                System.out.println(error);
+            }
+            return null;
+        }
+    }
+
+    /*实现注册的异步线程*/
     class Task extends AsyncTask<Void,Void,Void> {
 
         String error="";
@@ -129,11 +171,11 @@ public class Register extends AppCompatActivity {
             try {
                 //动态加载类
                 Class.forName("com.mysql.jdbc.Driver");
-                Connection connection= DriverManager.getConnection("jdbc:mysql://1.15.60.193:3306/Android",
+                Connection connection= DriverManager.getConnection("jdbc:mysql://1.15.60.193:3306/Android?useUnicode=true&characterEncoding=utf8",
                         "root","Weiyuexin@123456");
                 Statement statement=connection.createStatement();
                 //将数据插入mysql
-                boolean resultSet=statement.execute("INSERT INTO user(phoneNumber,passWord,registerTime) VALUES('"+phoneNumber+"','"+password+"','"+nowTime+"');");
+                boolean resultSet=statement.execute("INSERT INTO user(phoneNumber,userName,passWord,registerTime) VALUES('"+phoneNumber+"','"+username+"','"+password+"','"+nowTime+"');");
             }catch (Exception e){
                 error = e.toString();
                 System.out.println(error);
@@ -198,6 +240,9 @@ public class Register extends AppCompatActivity {
         }
         return false;
     }
+
+
+
     @Override
     /*重写finish方法，改变返回时的动画*/
     public void finish() {

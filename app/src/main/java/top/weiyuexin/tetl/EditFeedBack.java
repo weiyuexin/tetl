@@ -21,6 +21,12 @@ import android.widget.Toast;
 
 import com.gyf.immersionbar.ImmersionBar;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class EditFeedBack extends AppCompatActivity {
     private Toolbar toolbar_EditFeedBack;
     private RelativeLayout textviewLayout;
@@ -28,6 +34,8 @@ public class EditFeedBack extends AppCompatActivity {
     private Button submit;
     private TextView currentNumberTV;
     private TextWatcher watcher;
+    private String text;
+    private String tel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,12 +107,79 @@ public class EditFeedBack extends AppCompatActivity {
                 toast.show();
             }
             if(info.length()>=10&&info.length()<=200){
+                text=my_suggess_submit.getText().toString();
+                tel=telenumber.getText().toString();
+                //获取当前时间
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// HH:mm:ss
+                Date date = new Date(System.currentTimeMillis());
+                String nowTime;
+                nowTime=simpleDateFormat.format(date);
+                if(tel!=null){
+                    final int[] count = {0};
+                    Thread myThred = new Thread(){
+                        @Override
+                        public void run() {
+                            try {
+                                //动态加载类
+                                Class.forName("com.mysql.jdbc.Driver");
+                                Connection connection= DriverManager.getConnection("jdbc:mysql://1.15.60.193:3306/Android?useUnicode=true&characterEncoding=utf8",
+                                        "root","Weiyuexin@123456");//加入后面的一串是为了解决插入数据库时的中文乱码
+                                Statement statement=connection.createStatement();
+                                //发布文章
+                                boolean resultSet=statement.execute("INSERT INTO feedback(content,phone,time) VALUES('"+text+"','"+tel+"','"+nowTime+"');");
+                            }catch (Exception e){
+                                String error;
+                                error = e.toString();
+                                System.out.println(error);
+                            }
+                            while (count[0] <=3){
+                                try{
+                                    Thread.sleep(100);
+                                }catch (InterruptedException e){
+                                    e.printStackTrace();
+                                }
+                            }
+                            finish();
+                        }
+                    };
+                    myThred.start();
+                }else {
+                    final int[] count = {0};
+                    Thread myThred = new Thread(){
+                        @Override
+                        public void run() {
+                            try {
+                                //动态加载类
+                                Class.forName("com.mysql.jdbc.Driver");
+                                Connection connection= DriverManager.getConnection("jdbc:mysql://1.15.60.193:3306/Android?useUnicode=true&characterEncoding=utf8",
+                                        "root","Weiyuexin@123456");//加入后面的一串是为了解决插入数据库时的中文乱码
+                                Statement statement=connection.createStatement();
+                                //发布文章
+                                boolean resultSet=statement.execute("INSERT INTO feedback(content,time) VALUES('"+text+"'+'"+nowTime+"');");
+                            }catch (Exception e){
+                                String error;
+                                error = e.toString();
+                                System.out.println(error);
+                            }
+                            while (count[0] <=3){
+                                try{
+                                    Thread.sleep(100);
+                                }catch (InterruptedException e){
+                                    e.printStackTrace();
+                                }
+                            }
+                            finish();
+                        }
+                    };
+                    myThred.start();
+                }
                 Intent intent=new Intent();
                 intent.setClass(EditFeedBack.this, successuggestActivity.class);
                 EditFeedBack.this.startActivity(intent);
             }
         }
     }
+
 
 
     /**

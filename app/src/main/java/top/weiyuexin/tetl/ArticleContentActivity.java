@@ -4,8 +4,10 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -148,7 +150,9 @@ public class ArticleContentActivity extends AppCompatActivity {
                 String nowTime;
                 nowTime=simpleDateFormat.format(date);
                 //获取作者的id
-                Integer authorId=1;
+                SharedPreferences sharedPreferences= getSharedPreferences("user",
+                        Activity.MODE_PRIVATE);
+                Integer authorId =sharedPreferences.getInt("id",1);
                 //新建线程，将评论保存到数据库
                 final int[] count = {0};
                 new Thread(){

@@ -57,6 +57,8 @@ public class HomeTuijianFragment extends Fragment {
     private ArrayList<String> realNameList =new ArrayList<>();
     //保存从数据库查询到的评论总数
     private ArrayList<Integer> commentNumList = new ArrayList<>();
+    //保存查询到的手机号
+    private ArrayList<String> phoneNumberList = new ArrayList<>();
 
 
     /*ListView中的布局*/
@@ -212,6 +214,7 @@ public class HomeTuijianFragment extends Fragment {
                     while (findRealAuthor.next()){
                         userNameList.add(findRealAuthor.getString("userName"));
                         realNameList.add(findRealAuthor.getString("realName"));
+                        phoneNumberList.add(findRealAuthor.getString("phoneNumber"));
                     }
                 }
             }catch (Exception e){
@@ -225,7 +228,7 @@ public class HomeTuijianFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             HomeArticleAdapter homeArticleAdapter=new HomeArticleAdapter(idList,typeList,contentList,imgList,
-                    authorIdList,releaseTimeList,starList,userNameList,realNameList,commentNumList);
+                    authorIdList,releaseTimeList,starList,userNameList,realNameList,commentNumList,phoneNumberList);
             list.setAdapter(homeArticleAdapter);
             //System.out.println(contentList);
             list.setVisibility(View.VISIBLE);
@@ -255,6 +258,7 @@ public class HomeTuijianFragment extends Fragment {
         private ArrayList<String> userNameList = new ArrayList<>();
         //保存从数据库查询到的真实姓名
         private ArrayList<String> realNameList =new ArrayList<>();
+        private ArrayList<String> phoneNumberList = new ArrayList<>();
         //保存收藏的状态，默认是0，点击收藏后会变成1
         private ArrayList<Integer> shoucangList=new ArrayList<>();
         //保存点赞的状态，同上
@@ -265,7 +269,7 @@ public class HomeTuijianFragment extends Fragment {
                                   ArrayList<String> content,ArrayList<String> img,
                                   ArrayList<Integer> authonid,ArrayList<String> releaseTime,
                                   ArrayList<Integer> star,ArrayList<String> userName,
-                                  ArrayList<String> realName,ArrayList<Integer> comment) {
+                                  ArrayList<String> realName,ArrayList<Integer> comment,ArrayList<String> phone) {
             this.idList=id;
             this.typeList=type;
             this.contentList=content;
@@ -276,6 +280,7 @@ public class HomeTuijianFragment extends Fragment {
             this.userNameList=userName;
             this.realNameList=realName;
             this.commentSumList=comment;
+            this.phoneNumberList=phone;
             //初始化是否收藏标志列表和是否点赞标志位列表，默认是0
             for (int i=0;i<idList.size();i++){
                 shoucangList.add(0);
@@ -364,6 +369,9 @@ public class HomeTuijianFragment extends Fragment {
             }else {
                 userName.setText(userNameList.get(position).toString());
             }
+            /*if(realNameList.get(position)==null&& userNameList.get(position)==null){
+                userName.setText(phoneNumberList.get(position));
+            }*/
             //定义收藏按钮
             LinearLayout shoucang=view.findViewById(R.id.shoucang);
             //定义点击收藏后的事件
@@ -423,7 +431,6 @@ public class HomeTuijianFragment extends Fragment {
                                             "root","Weiyuexin@123456");
                                     Statement statement=connection.createStatement();
                                     //更新点赞数
-                                    System.out.println();
                                     boolean resultSet=statement.execute("UPDATE article SET star="+ finalStarsum+" WHERE id=" +(int)idList.get(position));
                                 }catch (Exception e){
                                     String error;

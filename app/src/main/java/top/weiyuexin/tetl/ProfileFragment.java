@@ -27,6 +27,7 @@ public class ProfileFragment extends Fragment {
     private LinearLayout ll_myIssue;
     private LinearLayout ll_helpAndFeedBack;
     private LinearLayout ll_setting;
+    private LinearLayout ll_account;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,6 +62,17 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(),ProfileMessage.class);
+                startActivity(intent);
+                //改变切换动画
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.anim_no);
+            }
+        });
+        //初始化账号管理页面
+        ll_account=view.findViewById(R.id.ll_account);
+        ll_account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(),AccountManagement.class);
                 startActivity(intent);
                 //改变切换动画
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.anim_no);

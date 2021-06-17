@@ -4,30 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
     android:orientation="vertical"
+    android:gravity="center"
     android:background="@mipmap/splash_background"
     tools:context=".Register">
+    <TextView
+        android:text="用户注册"
+        android:textSize="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <EditText
         android:layout_gravity="center"
         android:id="@+id/register_phone"
-        android:layout_width="@dimen/d5"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/d4"
-        android:layout_marginTop="@dimen/d10"
         android:background="@drawable/bg_edit"
         android:ems="10"
+        android:layout_marginTop="20dp"
         android:inputType="phone"
         android:padding="10sp"
         android:paddingLeft="30sp"
-        android:paddingTop="10sp"
         android:paddingRight="15sp"
         android:paddingBottom="15sp"
         android:hint="@string/user_name"
         android:textColor="@color/grey"/>
     <EditText
-        android:id="@+id/register_password"
-        android:layout_width="@dimen/d5"
+        android:layout_gravity="center"
+        android:id="@+id/register_username"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/d4"
-        android:layout_marginTop="@dimen/d2"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/bg_edit"
+        android:ems="10"
+        android:padding="10sp"
+        android:paddingLeft="30sp"
+        android:paddingRight="15sp"
+        android:paddingBottom="15sp"
+        android:hint="请输入昵称"
+        android:textColor="@color/grey"/>
+    <EditText
+        android:id="@+id/register_password"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d4"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center"
         android:background="@drawable/bg_edit"
         android:ems="10"
@@ -41,7 +62,7 @@
         android:textColor="@color/grey"/>
     <EditText
         android:id="@+id/register_pwd"
-        android:layout_width="@dimen/d5"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/d4"
         android:layout_marginTop="@dimen/d2"
         android:layout_gravity="center"
@@ -57,7 +78,7 @@
         android:textColor="@color/grey"/>
     <EditText
         android:id="@+id/register_code"
-        android:layout_width="@dimen/d5"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/d4"
         android:layout_marginTop="@dimen/d2"
         android:layout_gravity="center"
@@ -72,16 +93,15 @@
         android:textColor="@color/grey"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
             android:id="@+id/btn_verify"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/produce_verify"
             android:background="@drawable/bg_edit"
-            android:layout_marginTop="@dimen/d2"
-            android:layout_marginLeft="@dimen/d2"/>
+            android:layout_marginTop="@dimen/d2" />
         <ImageView
             android:id="@+id/image"
             android:layout_width="wrap_content"
@@ -93,9 +113,9 @@
 
     <LinearLayout
         android:id="@+id/register_li1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/d7"
+        android:paddingLeft="10dp"
         android:layout_marginTop="@dimen/d8"
         android:layout_marginRight="@dimen/d7"
         android:orientation="horizontal">
@@ -111,13 +131,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/protocol"
-            android:layout_marginLeft="@dimen/d1"
             android:textColor="@color/purple"/>
     </LinearLayout>
 
     <Button
         android:id="@+id/register_button"
-        android:layout_width="@dimen/d5"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/d4"
         android:layout_marginTop="@dimen/d3"
         android:background="@drawable/bg_edit1"

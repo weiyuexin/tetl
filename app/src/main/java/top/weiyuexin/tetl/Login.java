@@ -38,6 +38,13 @@ public class Login extends AppCompatActivity {
     private String password;
     private String pwd;
     private Integer id;//用户的id
+    private int sex;
+    private String userName;
+    private String realName;
+    private Integer studentNumber;
+    private String college;
+    private String major;
+    private String time;
     private ArrayList<String> phoneList=new ArrayList<>();
 
     @Override
@@ -140,12 +147,19 @@ public class Login extends AppCompatActivity {
                         "root","Weiyuexin@123456");
                 Statement statement=connection.createStatement();
                 //mysql简单查询语句
-                ResultSet resultSet=statement.executeQuery("SELECT id,passWord FROM user WHERE phoneNumber="+phoneNumber +" ORDER BY id desc");
+                ResultSet resultSet=statement.executeQuery("SELECT * FROM user WHERE phoneNumber="+phoneNumber +" ORDER BY id desc");
 
                 //将查询到的数据保存的LISt中
                 while (resultSet.next()){
                     pwd=resultSet.getString("passWord");
                     id=resultSet.getInt("id");
+                    sex=resultSet.getInt("sex");
+                    userName=resultSet.getString("userName");
+                    realName=resultSet.getString("realName");
+                    studentNumber=resultSet.getInt("studentNumber");
+                    college=resultSet.getString("college");
+                    major=resultSet.getString("major");
+                    time=resultSet.getString("registerTime");
                 }
             }catch (Exception e){
                 error = e.toString();
@@ -164,6 +178,14 @@ public class Login extends AppCompatActivity {
                 SharedPreferences.Editor editor = mySharedPreferences.edit();
                 editor.putInt("id", id);
                 editor.putString("phoneNumber", phoneNumber);
+                editor.putInt("sex",sex);
+                editor.putString("userName", userName);
+                editor.putString("realName", realName);
+                editor.putString("college", college);
+                editor.putString("major", major);
+                editor.putString("time", time);
+                editor.putString("passWord",password);
+                editor.putInt("studentNumber",studentNumber);
                 editor.commit();
                 Toast.makeText(Login.this,"登录成功",Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(Login.this,MainActivity.class);

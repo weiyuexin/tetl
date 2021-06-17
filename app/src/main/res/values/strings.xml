@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">铁塔湖畔</string>
     <string name="splash_text">尊敬的用户，您好</string>
-    <string name="click_to_enter">登陆</string>
-    <string name="click_to_register">注册</string>
+    <string name="click_to_enter">登                 陆</string>
+    <string name="click_to_register">注                册</string>
     <string name="user_name">请输入手机号</string>
     <string name="password">请输入密码</string>
     <string name="phone_number">手机号</string>
     <string name="verify_number">验证码</string>
-    <string name="protocol_admit">已阅读并同意服务条款</string>
+    <string name="protocol_admit">已阅读并同意</string>
     <string name="protocol">服务条款</string>
     <string name="protocol_text">哈哈哈哈我爱你</string>
     <string name="return1">点此返回</string>

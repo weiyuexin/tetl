@@ -3,10 +3,12 @@ package top.weiyuexin.tetl;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -69,7 +71,9 @@ public class EditArticleActivity extends AppCompatActivity {
                 String nowTime;
                 nowTime=simpleDateFormat.format(date);
                 //获取作者的id
-                Integer authorId=1;
+                SharedPreferences sharedPreferences= getSharedPreferences("user",
+                        Activity.MODE_PRIVATE);
+                Integer authorId =sharedPreferences.getInt("id",1);
 
                 if(content!=null && type!=null){
                     AlertDialog.Builder dialog = new AlertDialog.Builder(EditArticleActivity.this)
