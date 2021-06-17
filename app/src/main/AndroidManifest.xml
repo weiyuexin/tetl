@@ -17,7 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.TETL">
-        <activity android:name=".ChangePassword"></activity>
+        <activity android:name=".SceneryActivity"></activity>
+        <activity android:name=".CalendarActivity" />
+        <activity android:name=".ChangePassword" />
         <activity android:name=".AccountManagement" />
         <activity android:name=".Login" />
         <activity android:name=".Register" />

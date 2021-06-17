@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.gyf.immersionbar.ImmersionBar;
 
-import java.io.StringReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -129,7 +128,7 @@ public class Register extends AppCompatActivity {
 
     }
     /*实现查询手机号是否已经注册的异步线程*/
-    class Task1 extends AsyncTask<Void,Void,Void> implements top.weiyuexin.tetl.Task1 {
+    class Task1 extends AsyncTask<Void,Void,Void> {
 
         String error = "";
 
