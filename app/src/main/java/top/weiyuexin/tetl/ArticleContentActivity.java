@@ -82,6 +82,7 @@ public class ArticleContentActivity extends AppCompatActivity {
     private ListView content_comment_list;
     private int articleId;
     private Bundle data;
+    private Integer commentNumber;
 
     //保存数据库返回的评论id
     private ArrayList<Integer> commentIdList=new ArrayList<>();
@@ -107,8 +108,7 @@ public class ArticleContentActivity extends AppCompatActivity {
         data=intent.getExtras();
         //获取文章id
         articleId=data.getInt("id");
-
-
+        commentNumber=data.getInt("commentSum");
 
         //初始话视图
         initView();
@@ -144,6 +144,8 @@ public class ArticleContentActivity extends AppCompatActivity {
                 String commentContent;
                 commentContent=comment_comment.getText().toString();
                 System.out.println(commentContent);
+                commentNumber++;
+                commentSum.setText(String.valueOf(commentNumber));
                 //获取当前时间
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// HH:mm:ss
                 Date date = new Date(System.currentTimeMillis());
@@ -164,7 +166,8 @@ public class ArticleContentActivity extends AppCompatActivity {
                             Connection connection= DriverManager.getConnection("jdbc:mysql://1.15.60.193:3306/Android?useUnicode=true&characterEncoding=utf8",
                                     "root","Weiyuexin@123456");//加入后面的一串是为了解决插入数据库时的中文乱码
                             Statement statement=connection.createStatement();
-                            //发布文章
+                            //发布评论
+                            boolean resultSet0=statement.execute("UPDATE article SET comment="+ (data.getInt("commentSum")+1)+" WHERE id=" +data.getInt("id"));
                             boolean resultSet=statement.execute("INSERT INTO comment(articleId,commentContent,authorId,time) VALUES('"+articleId+"','"+commentContent+"','"+authorId+"','"+nowTime+"');");
                         }catch (Exception e){
                             String error;
@@ -246,7 +249,6 @@ public class ArticleContentActivity extends AppCompatActivity {
                 Connection connection= DriverManager.getConnection("jdbc:mysql://1.15.60.193:3306/Android",
                         "root","Weiyuexin@123456");
                 Statement statement=connection.createStatement();
-                //mysql简单查询语句
                 ResultSet resultSet=statement.executeQuery("SELECT * FROM comment WHERE articleId="+ articleId + " ORDER BY id desc");
                 //将查询到的数据保存的LISt中
                 while (resultSet.next()){
@@ -274,7 +276,7 @@ public class ArticleContentActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            MyAdapter commentAdapter=new MyAdapter(authorRealNameList,authorUserNameList,commentTimeList, commentContentList,commentStarsList,authorIdList);
+            MyAdapter commentAdapter=new MyAdapter(commentIdList,authorRealNameList,authorUserNameList,commentTimeList, commentContentList,commentStarsList,authorIdList);
             content_comment_list.setAdapter(commentAdapter);
             content_comment_list.setVisibility(View.VISIBLE);
             commentAdapter.notifyDataSetInvalidated();
@@ -322,6 +324,25 @@ public class ArticleContentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 iv_star.setSelected(true);
+                starSum.setText(String.valueOf(data.getInt("starSum")+1));
+                new Thread(){
+                    @Override
+                    public void run() {
+                        try {
+                            //动态加载类
+                            Class.forName("com.mysql.jdbc.Driver");
+                            Connection connection= DriverManager.getConnection("jdbc:mysql://1.15.60.193:3306/Android",
+                                    "root","Weiyuexin@123456");
+                            Statement statement=connection.createStatement();
+                            //更新点赞数
+                            boolean resultSet=statement.execute("UPDATE article SET star="+ (data.getInt("starSum")+1)+" WHERE id=" +data.getInt("id"));
+                        }catch (Exception e){
+                            String error;
+                            error = e.toString();
+                            System.out.println(error);
+                        }
+                    }
+                }.start();//开启线程
                 Toast.makeText(ArticleContentActivity.this,"点赞成功!",Toast.LENGTH_SHORT).show();
             }
         });
@@ -334,6 +355,7 @@ public class ArticleContentActivity extends AppCompatActivity {
         refreshLayout_article.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
+                commentSum.setText(String.valueOf(commentNumber));
                 //新建异步线程，链接查询数据库
                 new Task().execute();
                 refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
@@ -349,7 +371,7 @@ public class ArticleContentActivity extends AppCompatActivity {
         registerTime.setText(data.getString("time"));
         content.setText(data.getString("content"));
         if(data.getInt("commentSum") > 0){
-            commentSum.setText(String.valueOf(data.getInt("commentSum")));
+            commentSum.setText(String.valueOf(commentNumber));
         }
         if (data.getInt("starSum")>0){
             starSum.setText(String.valueOf(data.getInt("starSum")));
@@ -361,6 +383,7 @@ public class ArticleContentActivity extends AppCompatActivity {
     /*ListView适配器*/
     class MyAdapter extends BaseAdapter{
 
+        private ArrayList<Integer> commentIdList=new ArrayList<>();
         //保存数据库返回的作者真实姓名
         private ArrayList<String> authorRealNameList=new ArrayList<>();
         //保存作者昵称
@@ -374,7 +397,7 @@ public class ArticleContentActivity extends AppCompatActivity {
         //保存评论作者id
         private ArrayList<Integer> authorIdList=new ArrayList<>();
 
-        public MyAdapter(ArrayList<String> realname,ArrayList<String> username,
+        public MyAdapter(ArrayList<Integer> id,ArrayList<String> realname,ArrayList<String> username,
                          ArrayList<String> time,ArrayList<String> content,
                          ArrayList<Integer> star,ArrayList<Integer> authorId){
             this.authorRealNameList=realname;
@@ -383,6 +406,7 @@ public class ArticleContentActivity extends AppCompatActivity {
             this.commentContentList=content;
             this.commentStarsList=star;
             this.authorIdList=authorId;
+            this.commentIdList=id;
         }
 
         @Override
@@ -405,11 +429,38 @@ public class ArticleContentActivity extends AppCompatActivity {
             View view=null;
             view=View.inflate(ArticleContentActivity.this,R.layout.list_items_comment,null);
 
+            LinearLayout ll_comment_star=view.findViewById(R.id.ll_comment_star);
+            ImageView iv_comment_star=view.findViewById(R.id.iv_comment_star);
             TextView comment_authorName=view.findViewById(R.id.comment_authorName);
             TextView commentSum=view.findViewById(R.id.commentStarSum);
             TextView commentContent=view.findViewById(R.id.commentContent);
             TextView commentTime=view.findViewById(R.id.commentTime);
             ImageView comment_head_pic=view.findViewById(R.id.comment_head_pic);
+            ll_comment_star.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    iv_comment_star.setSelected(true);
+                    commentSum.setText(String.valueOf(commentStarsList.get(position)+1));
+                    new Thread(){
+                        @Override
+                        public void run() {
+                            try {
+                                //动态加载类
+                                Class.forName("com.mysql.jdbc.Driver");
+                                Connection connection= DriverManager.getConnection("jdbc:mysql://1.15.60.193:3306/Android",
+                                        "root","Weiyuexin@123456");
+                                Statement statement=connection.createStatement();
+                                //更新点赞数
+                                boolean resultSet=statement.execute("UPDATE comment SET star="+ (commentStarsList.get(position)+1)+" WHERE id=" +(int)commentIdList.get(position));
+                            }catch (Exception e){
+                                String error;
+                                error = e.toString();
+                                System.out.println(error);
+                            }
+                        }
+                    }.start();//开启线程
+                }
+            });
 
             System.out.println(authorRealNameList);
             if(authorRealNameList.get(position)!=null){

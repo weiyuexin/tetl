@@ -30,12 +30,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"/>
                 <LinearLayout
+                    android:id="@+id/ll_comment_star"
                     android:gravity="right"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <ImageView
                         android:src="@drawable/article_star"
-                        android:id="@+id/release_time"
+                        android:id="@+id/iv_comment_star"
                         android:layout_width="20dp"
                         android:layout_height="20dp"/>
                     <TextView

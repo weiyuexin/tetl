@@ -17,7 +17,16 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.TETL">
-        <activity android:name=".SceneryActivity"></activity>
+        <activity android:name=".SquareHotTopics"></activity>
+        <activity android:name=".EditSquareDeliciousFood" />
+        <activity android:name=".SquareDeliciousFood" />
+        <activity android:name=".EditSquareLostAndFound" />
+        <activity android:name=".SquareLostAndFound" />
+        <activity android:name=".EditSquareQimo" />
+        <activity android:name=".SquareQimo" />
+        <activity android:name=".EditSquareKaoyan" />
+        <activity android:name=".SquareKaoyan" />
+        <activity android:name=".SceneryActivity" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".ChangePassword" />
         <activity android:name=".AccountManagement" />

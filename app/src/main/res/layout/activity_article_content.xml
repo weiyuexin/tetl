@@ -88,7 +88,7 @@
                     android:id="@+id/content_article_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="100dp"/>
+                    android:minHeight="50dp"/>
                 <ImageView
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
@@ -108,7 +108,7 @@
                             android:layout_height="match_parent"/>
                         <TextView
                             android:id="@+id/content_comment_sum"
-                            android:text="66"
+                            android:text="0"
                             android:paddingLeft="5dp"
                             android:gravity="center"
                             android:layout_width="wrap_content"
@@ -124,7 +124,7 @@
                             android:layout_height="match_parent"/>
                         <TextView
                             android:id="@+id/star_sum"
-                            android:text="99"
+                            android:text="0"
                             android:paddingLeft="5dp"
                             android:gravity="center"
                             android:layout_width="wrap_content"
