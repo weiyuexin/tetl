@@ -12,12 +12,15 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.TETL">
-        <activity android:name=".SquareHotTopics"></activity>
+        <activity android:name=".NoticeStar"></activity>
+        <activity android:name=".NoticeComment" />
+        <activity android:name=".NoticeSystem" />
+        <activity android:name=".SquareHotTopics" />
         <activity android:name=".EditSquareDeliciousFood" />
         <activity android:name=".SquareDeliciousFood" />
         <activity android:name=".EditSquareLostAndFound" />

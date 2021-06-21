@@ -73,7 +73,6 @@ public class CodeUtils {
     }
     /**
      * 得到图片中的验证码字符串
-     * @return
      */
     public String getCode() {
         return code;
